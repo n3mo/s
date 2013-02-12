@@ -109,7 +109,7 @@ Remove whitespace at the beginning and end of `s`.
 
 Remove whitespace at the beginning of `s`.
 
-```cl
+```scheme
 (s-trim-left "trim ") ;; => "trim "
 (s-trim-left " this") ;; => "this"
 ```
@@ -118,7 +118,7 @@ Remove whitespace at the beginning of `s`.
 
 Remove whitespace at the end of `s`.
 
-```cl
+```scheme
 (s-trim-right "trim ") ;; => "trim"
 (s-trim-right " this") ;; => " this"
 ```
@@ -127,7 +127,7 @@ Remove whitespace at the end of `s`.
 
 Remove one trailing `\n`, `\r` or `\r\n` from `s`.
 
-```cl
+```scheme
 (s-chomp "no newlines\n") ;; => "no newlines"
 (s-chomp "no newlines\r\n") ;; => "no newlines"
 (s-chomp "some newlines\n\n") ;; => "some newlines\n"
@@ -137,7 +137,7 @@ Remove one trailing `\n`, `\r` or `\r\n` from `s`.
 
 Convert all adjacent whitespace characters to a single space.
 
-```cl
+```scheme
 (s-collapse-whitespace "only   one space   please") ;; => "only one space please"
 (s-collapse-whitespace "collapse \n all \t sorts of \r whitespace") ;; => "collapse all sorts of whitespace"
 ```
@@ -146,7 +146,7 @@ Convert all adjacent whitespace characters to a single space.
 
 If `s` is longer than `len`, wrap the words with newlines.
 
-```cl
+```scheme
 (s-word-wrap 10 "This is too long") ;; => "This is\ntoo long"
 (s-word-wrap 10 "This is way way too long") ;; => "This is\nway way\ntoo long"
 (s-word-wrap 10 "It-wraps-words-but-does-not-break-them") ;; => "It-wraps-words-but-does-not-break-them"
@@ -156,7 +156,7 @@ If `s` is longer than `len`, wrap the words with newlines.
 
 If `s` is shorter than `len`, pad it with spaces so it is centered.
 
-```cl
+```scheme
 (s-center 5 "a") ;; => "  a  "
 (s-center 5 "ab") ;; => "  ab "
 (s-center 1 "abc") ;; => "abc"
@@ -167,7 +167,7 @@ If `s` is shorter than `len`, pad it with spaces so it is centered.
 
 If `s` is longer than `len`, cut it down and add ... at the end.
 
-```cl
+```scheme
 (s-truncate 6 "This is too long") ;; => "Thi..."
 (s-truncate 16 "This is also too long") ;; => "This is also ..."
 (s-truncate 16 "But this is not!") ;; => "But this is not!"
@@ -177,7 +177,7 @@ If `s` is longer than `len`, cut it down and add ... at the end.
 
 Returns up to the `len` first chars of `s`.
 
-```cl
+```scheme
 (s-left 3 "lib/file.js") ;; => "lib"
 (s-left 3 "li") ;; => "li"
 ```
@@ -186,7 +186,7 @@ Returns up to the `len` first chars of `s`.
 
 Returns up to the `len` last chars of `s`.
 
-```cl
+```scheme
 (s-right 3 "lib/file.js") ;; => ".js"
 (s-right 3 "li") ;; => "li"
 ```
@@ -195,7 +195,7 @@ Returns up to the `len` last chars of `s`.
 
 Remove `suffix` if it is at end of `s`.
 
-```cl
+```scheme
 (s-chop-suffix "-test.js" "penguin-test.js") ;; => "penguin"
 (s-chop-suffix "\n" "no newlines\n") ;; => "no newlines"
 (s-chop-suffix "\n" "some newlines\n\n") ;; => "some newlines\n"
@@ -205,7 +205,7 @@ Remove `suffix` if it is at end of `s`.
 
 Remove `suffixes` one by one in order, if they are at the end of `s`.
 
-```cl
+```scheme
 (s-chop-suffixes '("_test.js" "-test.js" "Test.js") "penguin-test.js") ;; => "penguin"
 (s-chop-suffixes '("\r" "\n") "penguin\r\n") ;; => "penguin\r"
 (s-chop-suffixes '("\n" "\r") "penguin\r\n") ;; => "penguin"
@@ -215,7 +215,7 @@ Remove `suffixes` one by one in order, if they are at the end of `s`.
 
 Remove `prefix` if it is at the start of `s`.
 
-```cl
+```scheme
 (s-chop-prefix "/tmp" "/tmp/file.js") ;; => "/file.js"
 (s-chop-prefix "/tmp" "/tmp/tmp/file.js") ;; => "/tmp/file.js"
 ```
@@ -224,7 +224,7 @@ Remove `prefix` if it is at the start of `s`.
 
 Remove `prefixes` one by one in order, if they are at the start of `s`.
 
-```cl
+```scheme
 (s-chop-prefixes '("/tmp" "/my") "/tmp/my/file.js") ;; => "/file.js"
 (s-chop-prefixes '("/my" "/tmp") "/tmp/my/file.js") ;; => "/my/file.js"
 ```
@@ -233,7 +233,7 @@ Remove `prefixes` one by one in order, if they are at the start of `s`.
 
 Returns the longest prefix `s1` and `s2` have in common.
 
-```cl
+```scheme
 (s-shared-start "bar" "baz") ;; => "ba"
 (s-shared-start "foobar" "foo") ;; => "foo"
 (s-shared-start "bar" "foo") ;; => ""
@@ -243,7 +243,7 @@ Returns the longest prefix `s1` and `s2` have in common.
 
 Returns the longest suffix `s1` and `s2` have in common.
 
-```cl
+```scheme
 (s-shared-end "bar" "var") ;; => "ar"
 (s-shared-end "foo" "foo") ;; => "foo"
 (s-shared-end "bar" "foo") ;; => ""
@@ -254,7 +254,7 @@ Returns the longest suffix `s1` and `s2` have in common.
 
 Make a string of `s` repeated `num` times.
 
-```cl
+```scheme
 (s-repeat 10 " ") ;; => "          "
 (s-concat (s-repeat 8 "Na") " Batman!") ;; => "NaNaNaNaNaNaNaNa Batman!"
 ```
@@ -263,7 +263,7 @@ Make a string of `s` repeated `num` times.
 
 Join all the string arguments into one string.
 
-```cl
+```scheme
 (s-concat "abc" "def" "ghi") ;; => "abcdefghi"
 ```
 
@@ -271,7 +271,7 @@ Join all the string arguments into one string.
 
 Concatenate `prefix` and `s`.
 
-```cl
+```scheme
 (s-prepend "abc" "def") ;; => "abcdef"
 ```
 
@@ -279,7 +279,7 @@ Concatenate `prefix` and `s`.
 
 Concatenate `s` and `suffix`.
 
-```cl
+```scheme
 (s-append "abc" "def") ;; => "defabc"
 ```
 
@@ -288,7 +288,7 @@ Concatenate `s` and `suffix`.
 
 Splits `s` into a list of strings on newline characters.
 
-```cl
+```scheme
 (s-lines "abc\ndef\nghi") ;; => '("abc" "def" "ghi")
 (s-lines "abc\rdef\rghi") ;; => '("abc" "def" "ghi")
 (s-lines "abc\r\ndef\r\nghi") ;; => '("abc" "def" "ghi")
@@ -300,7 +300,7 @@ When the given expression matches the string, this function returns a list
 of the whole matching string and a string for each matched subexpressions.
 If it did not match the returned value is an empty list '().
 
-```cl
+```scheme
 (s-match "^def" "abcdefg") ;; => '()
 (s-match "^abc" "abcdefg") ;; => '("abc")
 (s-match "^/.*/\\([a-z]+\\)\\.\\([a-z]+\\)" "/some/weird/file.html") ;; => '("/some/weird/file.html" "file" "html")
@@ -310,7 +310,7 @@ If it did not match the returned value is an empty list '().
 
 Join all the strings in `strings` with `separator` in between.
 
-```cl
+```scheme
 (s-join "+" '("abc" "def" "ghi")) ;; => "abc+def+ghi"
 (s-join "\n" '("abc" "def" "ghi")) ;; => "abc\ndef\nghi"
 ```
@@ -322,7 +322,7 @@ Is `s1` equal to `s2`?
 
 This is a simple wrapper around the built-in `string-equal`.
 
-```cl
+```scheme
 (s-equals? "abc" "ABC") ;; => #f
 (s-equals? "abc" "abc") ;; => #t
 ```
@@ -333,7 +333,7 @@ Does `regexp` match `s`?
 
 This is a simple wrapper around the built-in `string-match-p`.
 
-```cl
+```scheme
 (s-matches? "^[0-9]+$" "123") ;; => #t
 (s-matches? "^[0-9]+$" "a123") ;; => #f
 ```
@@ -342,7 +342,7 @@ This is a simple wrapper around the built-in `string-match-p`.
 
 Is `s` the empty string?
 
-```cl
+```scheme
 (s-blank? "") ;; => #t
 (s-blank? " ") ;; => #f
 ```
@@ -356,7 +356,7 @@ attention to case differences.
 
 Alias: `s-suffix?`
 
-```cl
+```scheme
 (s-ends-with? ".md" "readme.md") ;; => #t
 (s-ends-with? ".MD" "readme.md") ;; => #f
 (s-ends-with? ".MD" "readme.md" t) ;; => #t
@@ -372,7 +372,7 @@ attention to case differences.
 Alias: `s-prefix?`. This is a simple wrapper around the built-in
 `string-prefix-p`.
 
-```cl
+```scheme
 (s-starts-with? "lib/" "lib/file.js") ;; => #t
 (s-starts-with? "LIB/" "lib/file.js") ;; => #f
 (s-starts-with? "LIB/" "lib/file.js" t) ;; => #t
@@ -385,7 +385,7 @@ Does `s` contain `needle`?
 If `ignore-case` is non-#f, the comparison is done without paying
 attention to case differences.
 
-```cl
+```scheme
 (s-contains? "file" "lib/file.js") ;; => #t
 (s-contains? "nope" "lib/file.js") ;; => #f
 (s-contains? "^a" "it's not ^a regexp") ;; => #t
@@ -395,7 +395,7 @@ attention to case differences.
 
 Are all the letters in `s` in lower case?
 
-```cl
+```scheme
 (s-lowercase? "file") ;; => #t
 (s-lowercase? "File") ;; => #f
 (s-lowercase? "123?") ;; => #t
@@ -405,7 +405,7 @@ Are all the letters in `s` in lower case?
 
 Are all the letters in `s` in upper case?
 
-```cl
+```scheme
 (s-uppercase? "HULK SMASH") ;; => #t
 (s-uppercase? "Bruce no smash") ;; => #f
 (s-uppercase? "123?") ;; => #t
@@ -415,7 +415,7 @@ Are all the letters in `s` in upper case?
 
 Are there both lower case and upper case letters in `s`?
 
-```cl
+```scheme
 (s-mixedcase? "HULK SMASH") ;; => #f
 (s-mixedcase? "Bruce no smash") ;; => #t
 (s-mixedcase? "123?") ;; => #f
@@ -425,7 +425,7 @@ Are there both lower case and upper case letters in `s`?
 
 Is `s` a number?
 
-```cl
+```scheme
 (s-numeric? "123") ;; => #t
 (s-numeric? "onetwothree") ;; => #f
 ```
@@ -435,7 +435,7 @@ Is `s` a number?
 
 Replaces `old` with `new` in `s`.
 
-```cl
+```scheme
 (s-replace "file" "nope" "lib/file.js") ;; => "lib/nope.js"
 (s-replace "^a" "\\1" "it's not ^a regexp") ;; => "it's not \\1 regexp"
 ```
@@ -446,7 +446,7 @@ Convert `s` to lower case.
 
 This is a simple wrapper around the built-in `downcase`.
 
-```cl
+```scheme
 (s-downcase "ABC") ;; => "abc"
 ```
 
@@ -456,7 +456,7 @@ Convert `s` to upper case.
 
 This is a simple wrapper around the built-in `upcase`.
 
-```cl
+```scheme
 (s-upcase "abc") ;; => "ABC"
 ```
 
@@ -464,7 +464,7 @@ This is a simple wrapper around the built-in `upcase`.
 
 Convert the first word's first character to upper case and the rest to lower case in `s`.
 
-```cl
+```scheme
 (s-capitalize "abc DEF") ;; => "Abc def"
 (s-capitalize "abc.DEF") ;; => "Abc.def"
 ```
@@ -475,7 +475,7 @@ Convert each word's first character to upper case and the rest to lower case in 
 
 This is a simple wrapper around the built-in `capitalize`.
 
-```cl
+```scheme
 (s-titleize "abc DEF") ;; => "Abc Def"
 (s-titleize "abc.DEF") ;; => "Abc.Def"
 ```
@@ -487,7 +487,7 @@ in the first form, making a list of it if it is not a list
 already. If there are more forms, inserts the first form as the
 last item in second form, etc.
 
-```cl
+```scheme
 (s-with "   hulk smash   " s-trim s-upcase) ;; => "HULK SMASH"
 (s-with "My car is a Toyota" (s-replace "car" "name") (s-replace "a Toyota" "Bond") (s-append ", James Bond")) ;; => "My name is Bond, James Bond"
 (s-with "abc \ndef  \nghi" s-lines (mapcar 's-trim) (s-join "-") s-reverse) ;; => "ihg-fed-cba"
@@ -500,7 +500,7 @@ Returns first index of `needle` in `s`, or #f.
 If `ignore-case` is non-#f, the comparison is done without paying
 attention to case differences.
 
-```cl
+```scheme
 (s-index-of "abc" "abcdef") ;; => 0
 (s-index-of "CDE" "abcdef" t) ;; => 2
 (s-index-of "n.t" "not a regexp") ;; => #f
@@ -510,7 +510,7 @@ attention to case differences.
 
 Return the reverse of `s`.
 
-```cl
+```scheme
 (s-reverse "abc") ;; => "cba"
 (s-reverse "ab xyz") ;; => "zyx ba"
 (s-reverse "") ;; => ""
@@ -534,7 +534,7 @@ adapted for this:
 The `replacer` function may be used to do any other kind of
 transformation.
 
-```cl
+```scheme
 (s-format "help ${name}! I'm ${malady}" 'aget '(("name" . "nic") ("malady" . "on fire"))) ;; => "help nic! I'm on fire"
 (s-format "hello ${name}, nice day" (lambda (var-name) "nic")) ;; => "hello nic, nice day"
 (s-format "hello $0, nice $1" 'elt '("nic" "day")) ;; => "hello nic, nice day"
@@ -545,7 +545,7 @@ transformation.
 
 Split `s` into list of words.
 
-```cl
+```scheme
 (s-split-words "under_score") ;; => '("under" "score")
 (s-split-words "some-dashed-words") ;; => '("some" "dashed" "words")
 (s-split-words "evenCamelCase") ;; => '("even" "Camel" "Case")
@@ -555,7 +555,7 @@ Split `s` into list of words.
 
 Convert `s` to lowerCamelCase.
 
-```cl
+```scheme
 (s-lower-camel-case "some words") ;; => "someWords"
 (s-lower-camel-case "dashed-words") ;; => "dashedWords"
 (s-lower-camel-case "under_scored_words") ;; => "underScoredWords"
@@ -565,7 +565,7 @@ Convert `s` to lowerCamelCase.
 
 Convert `s` to UpperCamelCase.
 
-```cl
+```scheme
 (s-upper-camel-case "some words") ;; => "SomeWords"
 (s-upper-camel-case "dashed-words") ;; => "DashedWords"
 (s-upper-camel-case "under_scored_words") ;; => "UnderScoredWords"
@@ -575,7 +575,7 @@ Convert `s` to UpperCamelCase.
 
 Convert `s` to snake_case.
 
-```cl
+```scheme
 (s-snake-case "some words") ;; => "some_words"
 (s-snake-case "dashed-words") ;; => "dashed_words"
 (s-snake-case "camelCasedWords") ;; => "camel_cased_words"
@@ -585,7 +585,7 @@ Convert `s` to snake_case.
 
 Convert `s` to dashed-words.
 
-```cl
+```scheme
 (s-dashed-words "some words") ;; => "some-words"
 (s-dashed-words "under_scored_words") ;; => "under-scored-words"
 (s-dashed-words "camelCasedWords") ;; => "camel-cased-words"
@@ -595,7 +595,7 @@ Convert `s` to dashed-words.
 
 Convert `s` to Capitalized Words.
 
-```cl
+```scheme
 (s-capitalized-words "some words") ;; => "Some words"
 (s-capitalized-words "under_scored_words") ;; => "Under scored words"
 (s-capitalized-words "camelCasedWords") ;; => "Camel cased words"
@@ -605,7 +605,7 @@ Convert `s` to Capitalized Words.
 
 Convert `s` to Titleized Words.
 
-```cl
+```scheme
 (s-titleized-words "some words") ;; => "Some Words"
 (s-titleized-words "under_scored_words") ;; => "Under Scored Words"
 (s-titleized-words "camelCasedWords") ;; => "Camel Cased Words"
