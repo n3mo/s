@@ -1,35 +1,47 @@
 ;;; These are helper functions for working with strings. Many of these
-;;; ideas were inspired by Magnar Sveen's Elisp string library (if not
-;;; all of them). Where existing scheme srfi (or builtin Chicken
-;;; procedures) exist, I have pointed them out rather than
-;;; re-inventing the wheel.
+;;; ideas are a direct port of Magnar Sveen's Elisp string library
+;;; (https://github.com/magnars/s.el). Furthermore, many of these
+;;; procedures are wrappers around existing functionality meant to
+;;; provide a unified string system for users.
 
-;;; TODO: Create these procedures: s-word-wrap, s-match
+;;; TODO: Create these procedures: s-word-wrap, s-match, s-with,
+;;; s-format 
 
 ;;; TODO: Fix s-capitalize. It currently works ONLY if the first
 ;;; character of the string also happens to be the first word. If the
 ;;; first word is preceded by a number, space, tab, etc, this will not
 ;;; work correctly.
 
+;;; TODO: Fix s-chomp. It currently only removes a trailing \n but not
+;;; \r or \r\n
+
+;;; Currently, this library relies on the following extensions.
 (require-extension regex)
 (require-extension srfi-13)
 
 
 ;;; s-trim (s)
 ;;; Remove whitespace at the beginning and end of s
-;;; srfi-13 : (string-trim-both)
+(define (s-trim s)
+  (string-trim-both s))
 
 ;;; s-trim-left (s)
 ;;; Remove whitespace at the beginning of s
 ;;; srfi-13 : (string-trim)
+(define (s-trim-left s)
+  (string-trim s))
 
 ;;; s-trim-right (s)
 ;;; Remove whitespace at the end of s
 ;;; srfi-13 : (string-trim-right)
+(define (s-trim-right s)
+  (string-trim-right s))
 
 ;;; s-chomp (s)
 ;;; Remove one trailing \n, \r, or \r\n from s
 ;;; Unit data-structures: (string-chomp)
+(define (s-chomp s)
+  (string-chomp s))
 
 ;;; s-collapse-whitespace (s)
 ;;; Convert all adjacent whitespace characters to a single space.
@@ -251,4 +263,40 @@
    (cons 
     (char-upcase (car (string->list s))) 
     (map char-downcase (cdr (string->list s))))))
+
+;;; s-titleize (s)
+;;; Convert each word's first character to upper case and the rest to
+;;; lower case in s.
+(define (s-titleize s)
+  (string-titlecase s))
+
+;;; s-with (s form &rest more)
+;;; Threads s through the forms. Inserts s as the last item in the
+;;; first form, making a list of it if it is not a list already. If
+;;; there are more forms, inserts the first form as the last item in
+;;; the second form, etc.
+
+;;; s-index-of (needle s #!optional ignore-case)
+;;; Returns first index of needle in s, or #f
+(define (s-index-of needle s #!optional ignore-case)
+  (if ignore-case
+      (string-contains-ci s needle)
+      (string-contains s needle)))
+
+;;; s-reverse (s)
+;;; Return the reverse of s.
+(define (s-reverse s)
+  (string-reverse s))
+
+;;; s-format (template replacer #!optional extra)
+;;; Format template with the function replacer. replacer takes an
+;;; argument of the format variable and optionally an extra argument
+;;; which is the extra value from the call to s-format. Several
+;;; standard s-format helper functions are recognized and adapted for
+;;; this: 
+
+;;; s-split-words (s)
+;;; Split s into list of words
+;;; Something like the following might work...
+;;; (string-substitute "([a-z])([A-Z])" "\\1 \\2" "not-camel-case" #t)
 
