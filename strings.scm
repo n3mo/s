@@ -297,6 +297,22 @@
 
 ;;; s-split-words (s)
 ;;; Split s into list of words
-;;; Something like the following might work...
-;;; (string-substitute "([a-z])([A-Z])" "\\1 \\2" "not-camel-case" #t)
+;;; The string-substitute call converts "camelCase" to "camel Case".
+(define (s-split-words s)
+  (string-split-fields 
+   "\\w+"
+   (string-substitute "_+" " " (string-substitute
+				"([a-z])([A-Z])"
+				"\\1 \\2" s #t) #t)))
+;;; s-lower-camel-case (s)
+;;; Convert s to lowerCamelCase
+(define (s-lower-camel-case s)
+  (let ((swords (s-split-words s)))
+    (s-join "" (cons 
+		(s-downcase (car swords))
+		(map s-capitalize (cdr swords))))))
 
+;;; s-upper-camel-case (s)
+;;; Convert s to UpperCamelCase
+(define (s-upper-camel-case s)
+  (s-join "" (map s-capitalize (s-split-words s))))
