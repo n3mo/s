@@ -12,12 +12,12 @@ Installation
 
 <i>Strings</i> requires the following dependencies/eggs:
 
-<code>
-(require-extension regex)
-(require-extension srfi-13)
-</code>
+<pre>
+regex
+srfi-13
+</pre>
 
-Currently, the only way to "install" this library is to save the source to your local computer  <code> git clone git://github.com/n3mo/strings.git </code>. Then, issue the command <code>(load "~/path/to/strings.scm")</code> either from the csi REPL or from your source file.
+Currently, the only way to "install" this library is to save the source to your local computer  <code> git clone git://github.com/n3mo/strings.git </code>. Then, issue the command <code>(load "~/path/to/strings.scm")</code> either from the csi REPL or from your source file. If you load the procedures independently, note that you will need to load the dependencies yourself by adding <code>(require-extension regex srfi-13)</code>, or equivalent to your code.
 
 Procedures
 ==========
