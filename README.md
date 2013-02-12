@@ -359,7 +359,7 @@ Alias: `s-suffix?`
 ```scheme
 (s-ends-with? ".md" "readme.md") ;; => #t
 (s-ends-with? ".MD" "readme.md") ;; => #f
-(s-ends-with? ".MD" "readme.md" t) ;; => #t
+(s-ends-with? ".MD" "readme.md" #t) ;; => #t
 ```
 
 ### s-starts-with? `(prefix s #!optional ignore-case)`
@@ -375,7 +375,7 @@ Alias: `s-prefix?`. This is a simple wrapper around the built-in
 ```scheme
 (s-starts-with? "lib/" "lib/file.js") ;; => #t
 (s-starts-with? "LIB/" "lib/file.js") ;; => #f
-(s-starts-with? "LIB/" "lib/file.js" t) ;; => #t
+(s-starts-with? "LIB/" "lib/file.js" #t) ;; => #t
 ```
 
 ### s-contains? `(needle s #!optional ignore-case)`
@@ -502,7 +502,7 @@ attention to case differences.
 
 ```scheme
 (s-index-of "abc" "abcdef") ;; => 0
-(s-index-of "CDE" "abcdef" t) ;; => 2
+(s-index-of "CDE" "abcdef" #t) ;; => 2
 (s-index-of "n.t" "not a regexp") ;; => #f
 ```
 
@@ -610,3 +610,34 @@ Convert `s` to Titleized Words.
 (s-titleized-words "under_scored_words") ;; => "Under Scored Words"
 (s-titleized-words "camelCasedWords") ;; => "Camel Cased Words"
 ```
+
+Acknowledgments 
+===============
+
+This library is a port of the [Emacs lisp s.el library](https://github.com/magnars/s.el). Most of the procedures retain similar functionality to their elisp equivalent. However, this is a scheme library, so functions behave accordingly (e.g., by returning #f rather than nil).
+
+Bugs & Improvements
+===================
+
+Please report any problems that you find, along with any suggestions or contributions to the theme. 
+
+License
+=======
+
+Copyright (C) 2013 Nicholas M. Van Horn
+
+Author: Nicholas M. Van Horn <vanhorn.nm@gmail.com>
+Keywords: chicken, scheme, string
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
