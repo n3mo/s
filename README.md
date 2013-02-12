@@ -47,7 +47,7 @@ Procedures
 ### To longer string
 
 * [s-repeat](#s-repeat-num-s) `(num s)`
-* [s-concat](#s-concat-rest-strings) `(&rest strings)`
+* [s-concat](#s-concat-rest-strings) `(... strings)`
 * [s-prepend](#s-prepend-prefix-s) `(prefix s)`
 * [s-append](#s-append-suffix-s) `(suffix s)`
 
@@ -77,7 +77,7 @@ Procedures
 * [s-upcase](#s-upcase-s) `(s)`
 * [s-capitalize](#s-capitalize-s) `(s)`
 * [s-titleize](#s-titleize-s) `(s)`
-* [s-with](#s-with-s-form-rest-more) `(s form &rest more)`
+* [s-with](#s-with-s-form-rest-more) `(s form ...)`
 * [s-index-of](#s-index-of-needle-s-optional-ignore-case) `(needle s #!optional ignore-case)`
 * [s-reverse](#s-reverse-s) `(s)`
 * [s-format](#s-format-template-replacer-optional-extra) `(template replacer #!optional extra)`
@@ -259,7 +259,7 @@ Make a string of `s` repeated `num` times.
 (s-concat (s-repeat 8 "Na") " Batman!") ;; => "NaNaNaNaNaNaNaNa Batman!"
 ```
 
-### s-concat `(&rest strings)`
+### s-concat `(... strings)`
 
 Join all the string arguments into one string.
 
@@ -320,7 +320,7 @@ Join all the strings in `strings` with `separator` in between.
 
 Is `s1` equal to `s2`?
 
-This is a simple wrapper around the built-in `string-equal`.
+This is a simple wrapper around the built-in `string=`.
 
 ```scheme
 (s-equals? "abc" "ABC") ;; => #f
@@ -330,8 +330,6 @@ This is a simple wrapper around the built-in `string-equal`.
 ### s-matches? `(regexp s)`
 
 Does `regexp` match `s`?
-
-This is a simple wrapper around the built-in `string-match-p`.
 
 ```scheme
 (s-matches? "^[0-9]+$" "123") ;; => #t
@@ -368,9 +366,6 @@ Does `s` start with `prefix`?
 
 If `ignore-case` is non-#f, the comparison is done without paying
 attention to case differences.
-
-Alias: `s-prefix?`. This is a simple wrapper around the built-in
-`string-prefix-p`.
 
 ```scheme
 (s-starts-with? "lib/" "lib/file.js") ;; => #t
@@ -444,7 +439,7 @@ Replaces `old` with `new` in `s`.
 
 Convert `s` to lower case.
 
-This is a simple wrapper around the built-in `downcase`.
+This is a simple wrapper around  `string-downcase`.
 
 ```scheme
 (s-downcase "ABC") ;; => "abc"
@@ -454,7 +449,7 @@ This is a simple wrapper around the built-in `downcase`.
 
 Convert `s` to upper case.
 
-This is a simple wrapper around the built-in `upcase`.
+This is a simple wrapper around the built-in `string-upcase`.
 
 ```scheme
 (s-upcase "abc") ;; => "ABC"
@@ -473,14 +468,14 @@ Convert the first word's first character to upper case and the rest to lower cas
 
 Convert each word's first character to upper case and the rest to lower case in `s`.
 
-This is a simple wrapper around the built-in `capitalize`.
+This is a simple wrapper around  `string-titlecase`.
 
 ```scheme
 (s-titleize "abc DEF") ;; => "Abc Def"
 (s-titleize "abc.DEF") ;; => "Abc.Def"
 ```
 
-### s-with `(s form &rest more)`
+### s-with `(s form ...)`
 
 Threads `s` through the forms. Inserts `s` as the last item
 in the first form, making a list of it if it is not a list
