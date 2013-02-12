@@ -3,7 +3,7 @@ Strings
 
 String manipulation egg for chicken scheme. 
 
-This library is currently under active development and is subject to change. The functions defined here are ported directly from the Emacs lisp string manipulation library "s" created by Magnar Sveen (and others) at <https://github.com/magnars/s.el>. Many of these functions are simply wrappers around existing scheme procedures. In the spirit of s.el, they provide users with a consistent API for quickly and easily manipulating strings in Chicken Scheme without searching documentation across multiple modules.
+This library is currently under active development and is subject to change. The functions defined here are ported directly from the Emacs lisp string manipulation library "s" created by Magnar Sveen (and others) at <https://github.com/magnars/s.el>. Some of these functions are simply wrappers around existing scheme procedures. In the spirit of s.el, they provide users with a consistent API for quickly and easily manipulating strings in Chicken Scheme without searching documentation across multiple modules.
 
 Installation
 ============
