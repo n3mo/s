@@ -99,7 +99,7 @@ Procedures
 
 Remove whitespace at the beginning and end of `s`.
 
-```cl
+```scheme
 (s-trim "trim ") ;; => "trim"
 (s-trim " this") ;; => "this"
 (s-trim " only  trims beg and end  ") ;; => "only  trims beg and end"
@@ -298,10 +298,10 @@ Splits `s` into a list of strings on newline characters.
 
 When the given expression matches the string, this function returns a list
 of the whole matching string and a string for each matched subexpressions.
-If it did not match the returned value is an empty list (nil).
+If it did not match the returned value is an empty list '().
 
 ```cl
-(s-match "^def" "abcdefg") ;; => nil
+(s-match "^def" "abcdefg") ;; => '()
 (s-match "^abc" "abcdefg") ;; => '("abc")
 (s-match "^/.*/\\([a-z]+\\)\\.\\([a-z]+\\)" "/some/weird/file.html") ;; => '("/some/weird/file.html" "file" "html")
 ```
@@ -323,8 +323,8 @@ Is `s1` equal to `s2`?
 This is a simple wrapper around the built-in `string-equal`.
 
 ```cl
-(s-equals? "abc" "ABC") ;; => nil
-(s-equals? "abc" "abc") ;; => t
+(s-equals? "abc" "ABC") ;; => #f
+(s-equals? "abc" "abc") ;; => #t
 ```
 
 ### s-matches? `(regexp s)`
@@ -334,62 +334,61 @@ Does `regexp` match `s`?
 This is a simple wrapper around the built-in `string-match-p`.
 
 ```cl
-(s-matches? "^[0-9]+$" "123") ;; => t
-(s-matches? "^[0-9]+$" "a123") ;; => nil
+(s-matches? "^[0-9]+$" "123") ;; => #t
+(s-matches? "^[0-9]+$" "a123") ;; => #f
 ```
 
 ### s-blank? `(s)`
 
-Is `s` nil or the empty string?
+Is `s` the empty string?
 
 ```cl
-(s-blank? "") ;; => t
-(s-blank? nil) ;; => t
-(s-blank? " ") ;; => nil
+(s-blank? "") ;; => #t
+(s-blank? " ") ;; => #f
 ```
 
 ### s-ends-with? `(suffix s #!optional ignore-case)`
 
 Does `s` end with `suffix`?
 
-If `ignore-case` is non-nil, the comparison is done without paying
+If `ignore-case` is non-#f, the comparison is done without paying
 attention to case differences.
 
 Alias: `s-suffix?`
 
 ```cl
-(s-ends-with? ".md" "readme.md") ;; => t
-(s-ends-with? ".MD" "readme.md") ;; => nil
-(s-ends-with? ".MD" "readme.md" t) ;; => t
+(s-ends-with? ".md" "readme.md") ;; => #t
+(s-ends-with? ".MD" "readme.md") ;; => #f
+(s-ends-with? ".MD" "readme.md" t) ;; => #t
 ```
 
 ### s-starts-with? `(prefix s #!optional ignore-case)`
 
 Does `s` start with `prefix`?
 
-If `ignore-case` is non-nil, the comparison is done without paying
+If `ignore-case` is non-#f, the comparison is done without paying
 attention to case differences.
 
 Alias: `s-prefix?`. This is a simple wrapper around the built-in
 `string-prefix-p`.
 
 ```cl
-(s-starts-with? "lib/" "lib/file.js") ;; => t
-(s-starts-with? "LIB/" "lib/file.js") ;; => nil
-(s-starts-with? "LIB/" "lib/file.js" t) ;; => t
+(s-starts-with? "lib/" "lib/file.js") ;; => #t
+(s-starts-with? "LIB/" "lib/file.js") ;; => #f
+(s-starts-with? "LIB/" "lib/file.js" t) ;; => #t
 ```
 
 ### s-contains? `(needle s #!optional ignore-case)`
 
 Does `s` contain `needle`?
 
-If `ignore-case` is non-nil, the comparison is done without paying
+If `ignore-case` is non-#f, the comparison is done without paying
 attention to case differences.
 
 ```cl
-(s-contains? "file" "lib/file.js") ;; => t
-(s-contains? "nope" "lib/file.js") ;; => nil
-(s-contains? "^a" "it's not ^a regexp") ;; => t
+(s-contains? "file" "lib/file.js") ;; => #t
+(s-contains? "nope" "lib/file.js") ;; => #f
+(s-contains? "^a" "it's not ^a regexp") ;; => #t
 ```
 
 ### s-lowercase? `(s)`
@@ -397,9 +396,9 @@ attention to case differences.
 Are all the letters in `s` in lower case?
 
 ```cl
-(s-lowercase? "file") ;; => t
-(s-lowercase? "File") ;; => nil
-(s-lowercase? "123?") ;; => t
+(s-lowercase? "file") ;; => #t
+(s-lowercase? "File") ;; => #f
+(s-lowercase? "123?") ;; => #t
 ```
 
 ### s-uppercase? `(s)`
@@ -407,9 +406,9 @@ Are all the letters in `s` in lower case?
 Are all the letters in `s` in upper case?
 
 ```cl
-(s-uppercase? "HULK SMASH") ;; => t
-(s-uppercase? "Bruce no smash") ;; => nil
-(s-uppercase? "123?") ;; => t
+(s-uppercase? "HULK SMASH") ;; => #t
+(s-uppercase? "Bruce no smash") ;; => #f
+(s-uppercase? "123?") ;; => #t
 ```
 
 ### s-mixedcase? `(s)`
@@ -417,9 +416,9 @@ Are all the letters in `s` in upper case?
 Are there both lower case and upper case letters in `s`?
 
 ```cl
-(s-mixedcase? "HULK SMASH") ;; => nil
-(s-mixedcase? "Bruce no smash") ;; => t
-(s-mixedcase? "123?") ;; => nil
+(s-mixedcase? "HULK SMASH") ;; => #f
+(s-mixedcase? "Bruce no smash") ;; => #t
+(s-mixedcase? "123?") ;; => #f
 ```
 
 ### s-numeric? `(s)`
@@ -427,8 +426,8 @@ Are there both lower case and upper case letters in `s`?
 Is `s` a number?
 
 ```cl
-(s-numeric? "123") ;; => t
-(s-numeric? "onetwothree") ;; => nil
+(s-numeric? "123") ;; => #t
+(s-numeric? "onetwothree") ;; => #f
 ```
 
 
@@ -496,15 +495,15 @@ last item in second form, etc.
 
 ### s-index-of `(needle s #!optional ignore-case)`
 
-Returns first index of `needle` in `s`, or nil.
+Returns first index of `needle` in `s`, or #f.
 
-If `ignore-case` is non-nil, the comparison is done without paying
+If `ignore-case` is non-#f, the comparison is done without paying
 attention to case differences.
 
 ```cl
 (s-index-of "abc" "abcdef") ;; => 0
 (s-index-of "CDE" "abcdef" t) ;; => 2
-(s-index-of "n.t" "not a regexp") ;; => nil
+(s-index-of "n.t" "not a regexp") ;; => #f
 ```
 
 ### s-reverse `(s)`
