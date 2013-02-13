@@ -316,3 +316,25 @@
 ;;; Convert s to UpperCamelCase
 (define (s-upper-camel-case s)
   (s-join "" (map s-capitalize (s-split-words s))))
+
+;;; s-snake-case (s)
+;;; Convert s to snake_case
+(define (s-snake-case s)
+  (s-downcase (s-join "_" (s-split-words s))))
+
+;;; s-dashed-words (s)
+;;; Convert s to dashed-words.
+(define (s-dashed-words s)
+  (s-downcase (s-join "-" (s-split-words s))))
+
+;;; s-capitalized-words (s)
+;;; Convert s to Capitalized words.
+(define (s-capitalized-words s)
+  (s-capitalize (s-join " " (s-split-words s))))
+
+;;; s-titleized-words (s)
+;;; Convert s to Titleized Words.
+(define (s-titleized-words s)
+  (s-titleize (s-join " " (s-split-words s))))
+
+;;; strings.scm ends here.
