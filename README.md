@@ -614,7 +614,7 @@ This library is a port of the [Emacs lisp s.el library](https://github.com/magna
 Bugs & Improvements
 ===================
 
-Please report any problems that you find, along with any suggestions or contributions to the theme. 
+Please report any problems that you find, along with any suggestions or contributions.
 
 License
 =======
