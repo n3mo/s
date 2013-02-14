@@ -142,16 +142,6 @@ Convert all adjacent whitespace characters to a single space.
 (s-collapse-whitespace "collapse \n all \t sorts of \r whitespace") ;; => "collapse all sorts of whitespace"
 ```
 
-### s-word-wrap `(len s)`
-
-If `s` is longer than `len`, wrap the words with newlines.
-
-```scheme
-(s-word-wrap 10 "This is too long") ;; => "This is\ntoo long"
-(s-word-wrap 10 "This is way way too long") ;; => "This is\nway way\ntoo long"
-(s-word-wrap 10 "It-wraps-words-but-does-not-break-them") ;; => "It-wraps-words-but-does-not-break-them"
-```
-
 ### s-center `(len s)`
 
 If `s` is shorter than `len`, pad it with spaces so it is centered.
@@ -296,14 +286,16 @@ Splits `s` into a list of strings on newline characters.
 
 ### s-match `(regexp s)`
 
-When the given expression matches the string, this function returns a list
-of the whole matching string and a string for each matched subexpressions.
-If it did not match the returned value is an empty list '().
+When the given expression matches the string, this function returns a
+list of the whole matching string and a string for each matched
+subexpressions.  If it did not match the returned value is an empty
+list '(). (Maybe it would be more sensible to return #f for
+non-matches?)
 
 ```scheme
 (s-match "^def" "abcdefg") ;; => '()
 (s-match "^abc" "abcdefg") ;; => '("abc")
-(s-match "^/.*/\\([a-z]+\\)\\.\\([a-z]+\\)" "/some/weird/file.html") ;; => '("/some/weird/file.html" "file" "html")
+(s-match "^.*/([a-z]+).([a-z]+)" "/some/weird/file.html") ;; => '("/some/weird/file.html" "file" "html")
 ```
 
 ### s-join `(separator strings)`
@@ -475,19 +467,6 @@ This is a simple wrapper around  `string-titlecase`.
 (s-titleize "abc.DEF") ;; => "Abc.Def"
 ```
 
-### s-with `(s form ...)`
-
-Threads `s` through the forms. Inserts `s` as the last item
-in the first form, making a list of it if it is not a list
-already. If there are more forms, inserts the first form as the
-last item in second form, etc.
-
-```scheme
-(s-with "   hulk smash   " s-trim s-upcase) ;; => "HULK SMASH"
-(s-with "My car is a Toyota" (s-replace "car" "name") (s-replace "a Toyota" "Bond") (s-append ", James Bond")) ;; => "My name is Bond, James Bond"
-(s-with "abc \ndef  \nghi" s-lines (mapcar 's-trim) (s-join "-") s-reverse) ;; => "ihg-fed-cba"
-```
-
 ### s-index-of `(needle s #!optional ignore-case)`
 
 Returns first index of `needle` in `s`, or #f.
@@ -510,31 +489,6 @@ Return the reverse of `s`.
 (s-reverse "ab xyz") ;; => "zyx ba"
 (s-reverse "") ;; => ""
 ```
-
-### s-format `(template replacer #!optional extra)`
-
-Format `template` with the function `replacer`.
-
-`replacer` takes an argument of the format variable and optionally
-an extra argument which is the `extra` value from the call to
-`s-format`.
-
-Several standard `s-format` helper functions are recognized and
-adapted for this:
-
-    (s-format "${name}" 'gethash hash-table)
-    (s-format "${name}" 'aget alist)
-    (s-format "$0" 'elt sequence)
-
-The `replacer` function may be used to do any other kind of
-transformation.
-
-```scheme
-(s-format "help ${name}! I'm ${malady}" 'aget '(("name" . "nic") ("malady" . "on fire"))) ;; => "help nic! I'm on fire"
-(s-format "hello ${name}, nice day" (lambda (var-name) "nic")) ;; => "hello nic, nice day"
-(s-format "hello $0, nice $1" 'elt '("nic" "day")) ;; => "hello nic, nice day"
-```
-
 
 ### s-split-words `(s)`
 
