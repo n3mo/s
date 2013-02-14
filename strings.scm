@@ -4,7 +4,7 @@
 ;;; procedures are wrappers around existing functionality meant to
 ;;; provide a unified string system for users.
 
-;;; TODO: Create these procedures: s-word-wrap, s-match, s-with,
+;;; TODO: Create these procedures: s-word-wrap, s-with,
 ;;; s-format 
 
 ;;; TODO: Fix s-capitalize. It currently works ONLY if the first
@@ -12,13 +12,9 @@
 ;;; first word is preceded by a number, space, tab, etc, this will not
 ;;; work correctly.
 
-;;; TODO: Fix s-chomp. It currently only removes a trailing \n but not
-;;; \r or \r\n
-
 ;;; Currently, this library relies on the following extensions.
 (require-extension regex)
 (require-extension srfi-13)
-
 
 ;;; s-trim (s)
 ;;; Remove whitespace at the beginning and end of s
@@ -39,9 +35,8 @@
 
 ;;; s-chomp (s)
 ;;; Remove one trailing \n, \r, or \r\n from s
-;;; Unit data-structures: (string-chomp)
 (define (s-chomp s)
-  (string-chomp s))
+  (s-chop-suffixes '("\n" "\r") s))
 
 ;;; s-collapse-whitespace (s)
 ;;; Convert all adjacent whitespace characters to a single space.
@@ -51,9 +46,10 @@
   (string-substitute "[[:space:]|\r]+" " " s #t))
 
 ;;; s-word-wrap (len s)
-;;; If s is longer than len, wrap the words with newlines 
-;;; This will be tricky to implement in chicken without the
-;;; fill-paragraph function of Emacs...
+;;; If s is longer than len, wrap the words with newlines.
+;; (define (s-word-wrap len s)
+;;   (if (<= (string-length s) len) s
+;;       ))
 
 ;;; s-center (len s)
 ;;; If s is shorter than len, pad it with spaces so it is centered.
@@ -161,10 +157,11 @@
 ;;; s-match (regexp s) 
 ;;; When the given expression matches the string, this function
 ;;; returns a list of the whole matching string and a string for each
-;;; matched subexpressions. If it did not match the returned value is
+;;; matched subexpression. If it did not match the returned value is
 ;;; an empty list (nil).
-
-;;; TODO
+(define (s-match regexp s)
+  (let ((result (string-search regexp s)))
+    (if result result '())))
 
 ;;; s-join (separator strings)
 ;;; Join all the strings in strings with separator in between
@@ -209,9 +206,9 @@
 (define (s-contains? needle s #!optional (ignore-case #f))
   (cond
    (ignore-case
-    (if (string-contains s needle)
-	#f
-	#t))
+    (if (string-contains-ci s needle)
+	#t
+	#f))
    (else
     (if (string-contains s needle)
 	#t
