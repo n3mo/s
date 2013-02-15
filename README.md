@@ -14,10 +14,11 @@ Installation
 
 <pre>
 regex
+srfi-1
 srfi-13
 </pre>
 
-Currently, the only way to "install" this library is to save the source to your local computer  <code> git clone git://github.com/n3mo/strings.git </code>. Then, issue the command <code>(load "~/path/to/strings.scm")</code> either from the csi REPL or from your source file. If you load the procedures independently, note that you will need to load the dependencies yourself by adding <code>(require-extension regex srfi-13)</code>, or equivalent to your code.
+<i>Strings</i> is packaged as a module, but it is currently not available with chicken-install. As sch, the only way to "install" this library is to save the source to your local computer  <code> git clone git://github.com/n3mo/strings.git </code>. Then, issue the command <code>(load "~/path/to/strings.scm")</code> either from the csi REPL or from your source file. After loading, you simply import the module with <code>(import strings)</code> and the procedures described below will become available.
 
 Procedures
 ==========
