@@ -5,7 +5,7 @@
 ;;; provide a unified string system for users.
 
 ;;; TODO: Create these procedures: s-word-wrap, s-with,
-;;; s-format 
+;;; s-format, s-unique-words
 
 (module strings *
   
@@ -227,6 +227,12 @@
 	     (string-match ".*[A-Z]+.*" s))
 	#t
 	#f))
+
+;;; s-capitalized? (s)
+;;; In s, is the first letter upper case, and all other letters lower
+;;; case? 
+  (define (s-capitalized? s)
+    (s-equals? s (s-capitalize s)))
 
 ;;; s-numeric? (s)
 ;;; Is s a number?

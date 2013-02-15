@@ -13,6 +13,7 @@ Installation
 <i>Strings</i> requires the following dependencies/eggs:
 
 <pre>
+data-structures
 regex
 srfi-1
 srfi-13
@@ -68,6 +69,7 @@ Procedures
 * [s-lowercase?](#s-lowercase-s) `(s)`
 * [s-uppercase?](#s-uppercase-s) `(s)`
 * [s-mixedcase?](#s-mixedcase-s) `(s)`
+* [s-capitalized?](#s-capitalized-s) `(s)`
 * [s-numeric?](#s-numeric-s) `(s)`
 
 ### The misc bucket
@@ -406,6 +408,14 @@ Are there both lower case and upper case letters in `s`?
 (s-mixedcase? "123?") ;; => #f
 ```
 
+### s-capitalized? `(s)`
+In `s`, is the first letter upper case, and all other letters lower case?
+```scheme
+(s-capitalized? "Capitalized") ;; => #t
+(s-capitalized? "I am capitalized") ;; => #t
+(s-capitalized? "I Am Titleized") ;; => #f
+```
+
 ### s-numeric? `(s)`
 
 Is `s` a number?
@@ -422,7 +432,7 @@ Replaces `old` with `new` in `s`.
 
 ```scheme
 (s-replace "file" "nope" "lib/file.js") ;; => "lib/nope.js"
-(s-replace "^a" "\\1" "it's not ^a regexp") ;; => "it's not \\1 regexp"
+(s-replace "^a" "---" "it's not ^a regexp") ;; => "it's not --- regexp"
 ```
 
 ### s-downcase `(s)`
