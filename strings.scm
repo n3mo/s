@@ -1,8 +1,35 @@
-;;; These are helper functions for working with strings. Many of these
-;;; ideas are a direct port of Magnar Sveen's Elisp string library
-;;; (https://github.com/magnars/s.el). Furthermore, many of these
-;;; procedures are wrappers around existing functionality meant to
-;;; provide a unified string system for users.
+;;; strings.scm --- Strings Egg For Chicken Scheme
+
+;; Copyright 2013, Nicholas M. Van Horn
+;; Inspired by: https://github.com/magnars/s.el
+
+;; Author: Nicholas M. Van Horn <vanhorn.nm@gmail.com>
+;; Keywords: string scheme chicken
+;; Version: 1.0
+
+;; This file is free software; you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation; either version 3, or (at your option)
+;; any later version.
+
+;; This file is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+;; GNU General Public License for more details.
+
+;; You should have received a copy of the GNU General Public License
+;; along with GNU Emacs; see the file COPYING. If not, write to
+;; the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+;; Boston, MA 02111-1307, USA. (or visit http://www.gnu.org/licenses/)
+;;
+
+;;; Commentary:
+
+;; These are helper functions for working with strings. Many of these
+;; ideas are a direct port of Magnar Sveen's Elisp string library
+;; (https://github.com/magnars/s.el). Furthermore, many of these
+;; procedures are wrappers around existing functionality meant to
+;; provide a unified string system for users.
 
 ;;; TODO: Create these procedures: s-word-wrap, s-with,
 ;;; s-format, s-unique-words
