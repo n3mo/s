@@ -1,0 +1,7 @@
+;;;; strings.meta -*- Scheme -*-
+
+((license "GPL")
+ (category misc)
+ (needs regex)
+ (author "Nicholas M. Van Horn")
+ (synopsis "Convenient string manipulations"))

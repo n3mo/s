@@ -1,0 +1,9 @@
+;;;; strings.setup -*- Scheme -*-
+
+(compile -s -O2 -d1 "strings.scm" -j strings)
+(compile -s "strings.import.scm" -O2 -d0)
+
+(install-extension
+ 'strings
+ '("strings.so" "strings.import.so")
+ '((version "1.0")))
