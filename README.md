@@ -18,7 +18,7 @@ srfi-1
 srfi-13
 </pre>
 
-<i>Strings</i> is packaged as a module, but it is currently not available with chicken-install. As sch, the only way to "install" this library is to save the source to your local computer  <code> git clone git://github.com/n3mo/strings.git </code>. Then, issue the command <code>(load "~/path/to/strings.scm")</code> either from the csi REPL or from your source file. After loading, you simply import the module with <code>(import strings)</code> and the procedures described below will become available.
+<i>Strings</i> is packaged as a module, but it is currently not available with chicken-install. As such, the only way to "install" this library is to save the source to your local computer (perhaps with the command <code> git clone git://github.com/n3mo/strings.git </code>). Then, issue the command <code>(load "~/path/to/strings.scm")</code> either from the csi REPL or from your source file. After loading, you simply import the module with <code>(import strings)</code> and the procedures described below will become available.
 
 Procedures
 ==========
@@ -30,7 +30,6 @@ Procedures
 * [s-trim-right](#s-trim-right-s) `(s)`
 * [s-chomp](#s-chomp-s) `(s)`
 * [s-collapse-whitespace](#s-collapse-whitespace-s) `(s)`
-* [s-word-wrap](#s-word-wrap-len-s) `(len s)`
 * [s-center](#s-center-len-s) `(len s)`
 
 ### To shorter string
@@ -78,10 +77,8 @@ Procedures
 * [s-upcase](#s-upcase-s) `(s)`
 * [s-capitalize](#s-capitalize-s) `(s)`
 * [s-titleize](#s-titleize-s) `(s)`
-* [s-with](#s-with-s-form-rest-more) `(s form ...)`
 * [s-index-of](#s-index-of-needle-s-optional-ignore-case) `(needle s #!optional ignore-case)`
 * [s-reverse](#s-reverse-s) `(s)`
-* [s-format](#s-format-template-replacer-optional-extra) `(template replacer #!optional extra)`
 
 ### Pertaining to words
 
