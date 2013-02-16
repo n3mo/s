@@ -56,6 +56,7 @@ Procedures
 
 * [s-lines](#s-lines-s) `(s)`
 * [s-match](#s-match-regexp-s) `(regexp s)`
+* [s-split](#s-split-s) `(separators s #!optional keepempty)`
 * [s-join](#s-join-separator-strings) `(separator strings)`
 
 ### Predicates
@@ -300,8 +301,8 @@ non-matches?)
 
 ### s-split `(separators s #!optional keepempty)`
 
-Splits `s` into substrings bounded by matches for SEPARATORS. If
-KEEPEMPTY is #t, zero-length substrings are returned.
+Splits `s` into substrings bounded by matches for `separators`. If
+`keepempty` is #t, zero-length substrings are returned.
 
 ```scheme
 (string-split "one  two  three") ;; => ("one" "two" "three")
