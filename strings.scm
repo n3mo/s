@@ -186,6 +186,12 @@
     (let ((result (string-search regexp s)))
       (if result result '())))
 
+;;; s-split (separators s #!optional keepempty)
+;;; Splits `s` into substrings bounded by matches for SEPARATORS. If
+;;; KEEPEMPTY is #t, zero-length substrings are returned. 
+(define (s-split separators s #!optional keepempty)
+  (string-split s separators keepempty))
+
 ;;; s-join (separator strings)
 ;;; Join all the strings in strings with separator in between
   (define (s-join separator strings)
@@ -363,5 +369,5 @@
   (define (s-titleized-words s)
     (s-titleize (s-join " " (s-split-words s))))
 
-)
+  )
 ;;; strings.scm ends here.

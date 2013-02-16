@@ -73,6 +73,10 @@
 (s-match "^abc" "abcdefg") ;; => '("abc")
 (s-match "^.*/([a-z]+).([a-z]+)" "/some/weird/file.html") ;; => '("/some/weird/file.html" "file" "html")
 
+(string-split "one  two  three") ;; => ("one" "two" "three")
+(string-split "foo:bar::baz:" ":" #t) ;; => ("foo" "bar" "" "baz" "")
+(string-split "foo:bar:baz,quux,zot" ":," ) ;; => ("foo" "bar" "baz" "quux" "zot")
+
 (s-join "+" '("abc" "def" "ghi")) ;; => "abc+def+ghi"
 (s-join "\n" '("abc" "def" "ghi")) ;; => "abc\ndef\nghi"
 
