@@ -56,6 +56,7 @@ Procedures
 
 * [s-lines](#s-lines-s) `(s)`
 * [s-match](#s-match-regexp-s) `(regexp s)`
+* [s-match-multiple](#s-match-multiple-s) `(regexp s)`
 * [s-split](#s-split-s) `(separators s #!optional keepempty)`
 * [s-join](#s-join-separator-strings) `(separator strings)`
 
@@ -290,13 +291,19 @@ Splits `s` into a list of strings on newline characters.
 When the given expression matches the string, this function returns a
 list of the whole matching string and a string for each matched
 subexpressions.  If it did not match the returned value is an empty
-list '(). (Maybe it would be more sensible to return #f for
-non-matches?)
+list '().
 
 ```scheme
 (s-match "^def" "abcdefg") ;; => '()
 (s-match "^abc" "abcdefg") ;; => '("abc")
 (s-match "^.*/([a-z]+).([a-z]+)" "/some/weird/file.html") ;; => '("/some/weird/file.html" "file" "html")
+```
+
+### s-match-multiple `(regexp s)`
+
+Returns a list of all matches to `regexp` in `s`.
+```scheme
+(s-match-multiple "[[:digit:]]{4}" "Grab (1234) four-digit (4321) numbers (4567)") ;; => ("1234" "4321" "4567")
 ```
 
 ### s-split `(separators s #!optional keepempty)`

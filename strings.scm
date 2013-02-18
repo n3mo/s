@@ -186,6 +186,15 @@
     (let ((result (string-search regexp s)))
       (if result result '())))
 
+;;; s-match-multiple (regexp s)
+;;; Returns a list of all matches to regexp in s.
+(define (s-match-multiple regexp s)
+  (let ((myregexp (s-append ")(.+)" (s-prepend "(" regexp))))
+    (let ((mymatch (s-match myregexp s)))
+      (if (null? mymatch) '()
+	  (cons (cadr mymatch) 
+		(s-match-multiple regexp (car (cddr mymatch))))))))
+
 ;;; s-split (separators s #!optional keepempty)
 ;;; Splits `s` into substrings bounded by matches for SEPARATORS. If
 ;;; KEEPEMPTY is #t, zero-length substrings are returned. 
