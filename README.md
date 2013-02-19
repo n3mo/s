@@ -304,6 +304,8 @@ list '().
 Returns a list of all matches to `regexp` in `s`.
 ```scheme
 (s-match-multiple "[[:digit:]]{4}" "Grab (1234) four-digit (4321) numbers (4567)") ;; => ("1234" "4321" "4567")
+(s-match-multiple "<.+?>" "<html> <body> Some text </body> </html>") ;; => ("<html>" "<body>" "</body>" "</html>")
+(s-match-multiple "foo-[0-9]{2}" "foo-10 foo-11 foo-1 foo-2 foo-100 foo-21") ;; => ("foo-10" "foo-11" "foo-10" "foo-21")
 ```
 
 ### s-split `(separators s #!optional keepempty)`
@@ -312,9 +314,9 @@ Splits `s` into substrings bounded by matches for `separators`. If
 `keepempty` is #t, zero-length substrings are returned.
 
 ```scheme
-(string-split "one  two  three") ;; => ("one" "two" "three")
-(string-split "foo:bar::baz:" ":" #t) ;; => ("foo" "bar" "" "baz" "")
-(string-split "foo:bar:baz,quux,zot" ":," ) ;; => ("foo" "bar" "baz" "quux" "zot")
+(s-split " " "one  two  three") ;; => ("one" "two" "three")
+(s-split ":" "foo:bar::baz" #t) ;; => ("foo" "bar" "" "baz")
+(s-split ":," "foo:bar:baz,quux,zot") ;; => ("foo" "bar" "baz" "quux" "zot")
 ```
 
 ### s-join `(separator strings)`

@@ -73,9 +73,13 @@
 (s-match "^abc" "abcdefg") ;; => '("abc")
 (s-match "^.*/([a-z]+).([a-z]+)" "/some/weird/file.html") ;; => '("/some/weird/file.html" "file" "html")
 
-(string-split "one  two  three") ;; => ("one" "two" "three")
-(string-split "foo:bar::baz:" ":" #t) ;; => ("foo" "bar" "" "baz" "")
-(string-split "foo:bar:baz,quux,zot" ":," ) ;; => ("foo" "bar" "baz" "quux" "zot")
+(s-match-multiple "[[:digit:]]{4}" "Grab (1234) four-digit (4321) numbers (4567)") ;; => ("1234" "4321" "4567")
+(s-match-multiple "<.+?>" "<html> <body> Some text </body> </html>") ;; => ("<html>" "<body>" "</body>" "</html>")
+(s-match-multiple "foo-[0-9]{2}" "foo-10 foo-11 foo-1 foo-2 foo-100 foo-21") ;; => ("foo-10" "foo-11" "foo-10" "foo-21")
+
+(s-split " " "one  two  three") ;; => ("one" "two" "three")
+(s-split ":" "foo:bar::baz" #t) ;; => ("foo" "bar" "" "baz")
+(s-split ":," "foo:bar:baz,quux,zot") ;; => ("foo" "bar" "baz" "quux" "zot")
 
 (s-join "+" '("abc" "def" "ghi")) ;; => "abc+def+ghi"
 (s-join "\n" '("abc" "def" "ghi")) ;; => "abc\ndef\nghi"
