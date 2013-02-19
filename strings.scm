@@ -189,7 +189,7 @@
 ;;; s-match-multiple (regexp s)
 ;;; Returns a list of all matches to regexp in s.
 (define (s-match-multiple regexp s)
-  (let ((myregexp (s-append ")(.+)" (s-prepend "(" regexp))))
+  (let ((myregexp (s-append ")(.*)" (s-prepend "(" regexp))))
     (let ((mymatch (s-match myregexp s)))
       (if (null? mymatch) '()
 	  (cons (cadr mymatch) 
