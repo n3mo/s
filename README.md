@@ -94,6 +94,7 @@ Procedures
 * [s-dashed-words](#procedure-s-dashed-words-s) `(s)`
 * [s-capitalized-words](#procedure-s-capitalized-words-s) `(s)`
 * [s-titleized-words](#procedure-s-titleized-words-s) `(s)`
+* [s-unique-words](#procedure-s-unique-words-s) `(s)`
 
 ## Documentation and examples
 
