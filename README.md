@@ -3,7 +3,7 @@ Strings
 
 String manipulation egg for chicken scheme. 
 
-This library is currently under active development and is subject to change. The functions defined here are ported directly from the Emacs lisp string manipulation library "s" created by Magnar Sveen (and others) at <https://github.com/magnars/s.el>. Some of these functions are simply wrappers around existing scheme procedures. In the spirit of s.el, they provide users with a consistent API for quickly and easily manipulating strings in Chicken Scheme without searching documentation across multiple modules.
+This library is currently under active development and is subject to change. The functions defined here were inspired by the Emacs lisp string manipulation library "s" created by Magnar Sveen (and others) at <https://github.com/magnars/s.el>. As such, many procedures are a direct port of their Elisp counterparts (however, novel procedures have been defined as well). Some of these functions are simply wrappers around existing scheme procedures. In the spirit of s.el, such wrappers exist to provide users with a consistent API for quickly and easily manipulating strings in Chicken Scheme without searching documentation across multiple modules.
 
 Installation
 ============
@@ -57,7 +57,7 @@ Procedures
 * [s-lines](#s-lines-s) `(s)`
 * [s-match](#s-match-regexp-s) `(regexp s)`
 * [s-match-multiple](#s-match-multiple-s) `(regexp s)`
-* [s-split](#s-split-s) `(separators s #!optional keepempty)`
+* [s-split](#s-split-s) `(separators s [keepempty])`
 * [s-join](#s-join-separator-strings) `(separator strings)`
 
 ### Predicates
@@ -65,9 +65,9 @@ Procedures
 * [s-equals?](#s-equals-s1-s2) `(s1 s2)`
 * [s-matches?](#s-matches-regexp-s) `(regexp s)`
 * [s-blank?](#s-blank-s) `(s)`
-* [s-ends-with?](#s-ends-with-suffix-s-optional-ignore-case) `(suffix s #!optional ignore-case)`
-* [s-starts-with?](#s-starts-with-prefix-s-optional-ignore-case) `(prefix s #!optional ignore-case)`
-* [s-contains?](#s-contains-needle-s-optional-ignore-case) `(needle s #!optional ignore-case)`
+* [s-ends-with?](#s-ends-with-suffix-s-optional-ignore-case) `(suffix s [ignore-case])`
+* [s-starts-with?](#s-starts-with-prefix-s-optional-ignore-case) `(prefix s [ignore-case])`
+* [s-contains?](#s-contains-needle-s-optional-ignore-case) `(needle s [ignore-case])`
 * [s-lowercase?](#s-lowercase-s) `(s)`
 * [s-uppercase?](#s-uppercase-s) `(s)`
 * [s-mixedcase?](#s-mixedcase-s) `(s)`
@@ -81,7 +81,7 @@ Procedures
 * [s-upcase](#s-upcase-s) `(s)`
 * [s-capitalize](#s-capitalize-s) `(s)`
 * [s-titleize](#s-titleize-s) `(s)`
-* [s-index-of](#s-index-of-needle-s-optional-ignore-case) `(needle s #!optional ignore-case)`
+* [s-index-of](#s-index-of-needle-s-optional-ignore-case) `(needle s [ignore-case])`
 * [s-reverse](#s-reverse-s) `(s)`
 
 ### Pertaining to words
@@ -97,7 +97,7 @@ Procedures
 ## Documentation and examples
 
 
-### s-trim `(s)`
+### [procedure] `s-trim (s)`
 
 Remove whitespace at the beginning and end of `s`.
 
@@ -290,7 +290,7 @@ Splits `s` into a list of strings on newline characters.
 
 When the given expression matches the string, this function returns a
 list of the whole matching string and a string for each matched
-subexpressions.  If it did not match the returned value is an empty
+subexpression.  If it did not match the returned value is an empty
 list '().
 
 ```scheme
@@ -308,7 +308,7 @@ Returns a list of all matches to `regexp` in `s`.
 (s-match-multiple "foo-[0-9]{2}" "foo-10 foo-11 foo-1 foo-2 foo-100 foo-21") ;; => ("foo-10" "foo-11" "foo-10" "foo-21")
 ```
 
-### s-split `(separators s #!optional keepempty)`
+### s-split `(separators s [keepempty])`
 
 Splits `s` into substrings bounded by matches for `separators`. If
 `keepempty` is #t, zero-length substrings are returned.
@@ -357,7 +357,7 @@ Is `s` the empty string?
 (s-blank? " ") ;; => #f
 ```
 
-### s-ends-with? `(suffix s #!optional ignore-case)`
+### s-ends-with? `(suffix s [ignore-case])`
 
 Does `s` end with `suffix`?
 
@@ -372,7 +372,7 @@ Alias: `s-suffix?`
 (s-ends-with? ".MD" "readme.md" #t) ;; => #t
 ```
 
-### s-starts-with? `(prefix s #!optional ignore-case)`
+### s-starts-with? `(prefix s [ignore-case])`
 
 Does `s` start with `prefix`?
 
@@ -385,7 +385,7 @@ attention to case differences.
 (s-starts-with? "LIB/" "lib/file.js" #t) ;; => #t
 ```
 
-### s-contains? `(needle s #!optional ignore-case)`
+### s-contains? `(needle s [ignore-case])`
 
 Does `s` contain `needle`?
 
@@ -436,6 +436,15 @@ In `s`, is the first letter upper case, and all other letters lower case?
 (s-capitalized? "I Am Titleized") ;; => #f
 ```
 
+### s-titleized? `(s)`
+In s, is the first letter of each word upper case, and all other
+letters lower case?
+```scheme
+(s-titleized? "Titleized") ;; => #t
+(s-titleized? "I Am Titleized") ;; => #t
+(s-titleized? "I am only capitalized") ;; => #f
+```
+
 ### s-numeric? `(s)`
 
 Is `s` a number?
@@ -444,7 +453,6 @@ Is `s` a number?
 (s-numeric? "123") ;; => #t
 (s-numeric? "onetwothree") ;; => #f
 ```
-
 
 ### s-replace `(old new s)`
 
@@ -469,7 +477,7 @@ This is a simple wrapper around  `string-downcase`.
 
 Convert `s` to upper case.
 
-This is a simple wrapper around the built-in `string-upcase`.
+This is a simple wrapper around `string-upcase`.
 
 ```scheme
 (s-upcase "abc") ;; => "ABC"
@@ -495,7 +503,7 @@ This is a simple wrapper around  `string-titlecase`.
 (s-titleize "abc.DEF") ;; => "Abc.Def"
 ```
 
-### s-index-of `(needle s #!optional ignore-case)`
+### s-index-of `(needle s [ignore-case])`
 
 Returns first index of `needle` in `s`, or #f.
 
@@ -591,7 +599,7 @@ Convert `s` to Titleized Words.
 Acknowledgments 
 ===============
 
-This library is a port of the [Emacs lisp s.el library](https://github.com/magnars/s.el). Most of the procedures retain similar functionality to their elisp equivalent. However, this is a scheme library, so functions behave accordingly (e.g., by returning #f rather than nil).
+This library is mostly a port of the [Emacs lisp s.el library](https://github.com/magnars/s.el). Most of the procedures retain similar functionality to their elisp equivalent. However, this is a scheme library, so functions behave accordingly (e.g., by returning #f rather than nil).
 
 Bugs & Improvements
 ===================
