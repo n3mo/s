@@ -600,6 +600,8 @@ Convert `s` to Titleized Words.
 
 ### [procedure] `(s-unique-words s)`
 
+Return list of unique words in s.
+
 ```scheme
 (s-unique-words "Forget redundancy about about redundancy") ;; => ("Forget" "about" "redundancy")
 (s-unique-words "unique-dashed-words-dashed-words-too") ;; => ("unique" "dashed" "words" "too")

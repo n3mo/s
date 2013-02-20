@@ -385,7 +385,7 @@
     (s-titleize (s-join " " (s-split-words s))))
 
 ;;; s-unique-words (s)
-;;; Returns list of unique words in s.
+;;; Return list of unique words in s.
 (define (s-unique-words s)
   (let ((mywords (s-split-words s)))
     (define (unique mylist)
