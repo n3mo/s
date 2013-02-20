@@ -26,7 +26,7 @@ Procedures
 
 ### Tweak whitespace
 
-* [s-trim](#[procedure] s-trim-s) `(s)`
+* [s-trim](#procedure-s-trim-s) `(s)`
 * [s-trim-left](#s-trim-left-s) `(s)`
 * [s-trim-right](#s-trim-right-s) `(s)`
 * [s-chomp](#s-chomp-s) `(s)`
