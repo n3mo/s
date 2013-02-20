@@ -597,6 +597,15 @@ Convert `s` to Titleized Words.
 (s-titleized-words "camelCasedWords") ;; => "Camel Cased Words"
 ```
 
+### [procedure] `(s-unique-words s)`
+
+```scheme
+(s-unique-words "Forget redundancy about about redundancy") ;; => ("Forget" "about" "redundancy")
+(s-unique-words "unique-dashed-words-dashed-words-too") ;; => ("unique" "dashed" "words" "too")
+(s-unique-words "camelCase_words and_and underscore_words_too") ;; => ("camel" "Case" "and" "underscore" "words" "too")
+```
+
+
 Acknowledgments 
 ===============
 

@@ -384,5 +384,16 @@
   (define (s-titleized-words s)
     (s-titleize (s-join " " (s-split-words s))))
 
-  )
+;;; s-unique-words (s)
+;;; Returns list of unique words in s.
+(define (s-unique-words s)
+  (let ((mywords (s-split-words s)))
+    (define (unique mylist)
+      (cond
+       ((null? mylist) '())
+       ((member (car mylist) (cdr mylist)) (unique (cdr mylist)))
+       (else (cons (car mylist) (unique (cdr mylist))))))
+    (unique mywords)))
+
+)
 ;;; strings.scm ends here.

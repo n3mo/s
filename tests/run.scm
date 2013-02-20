@@ -177,4 +177,8 @@
 (s-titleized-words "under_scored_words") ;; => "Under Scored Words"
 (s-titleized-words "camelCasedWords") ;; => "Camel Cased Words"
 
+(s-unique-words "Forget redundancy about about redundancy") ;; => ("Forget" "about" "redundancy")
+(s-unique-words "unique-dashed-words-dashed-words-too") ;; => ("unique" "dashed" "words" "too")
+(s-unique-words "camelCase_words and_and underscore_words_too") ;; => ("camel" "Case" "and" "underscore" "words" "too")
+
 ;;; end of file run.scm
