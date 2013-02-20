@@ -26,7 +26,7 @@ Procedures
 
 ### Tweak whitespace
 
-* [s-trim](#s-trim-s) `(s)`
+* [s-trim](#[procedure] s-trim-s) `(s)`
 * [s-trim-left](#s-trim-left-s) `(s)`
 * [s-trim-right](#s-trim-right-s) `(s)`
 * [s-chomp](#s-chomp-s) `(s)`
@@ -72,6 +72,7 @@ Procedures
 * [s-uppercase?](#s-uppercase-s) `(s)`
 * [s-mixedcase?](#s-mixedcase-s) `(s)`
 * [s-capitalized?](#s-capitalized-s) `(s)`
+* [s-titleized?](#s-titleized-s)`(s)`
 * [s-numeric?](#s-numeric-s) `(s)`
 
 ### The misc bucket
