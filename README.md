@@ -98,7 +98,7 @@ Procedures
 ## Documentation and examples
 
 
-### [procedure] `s-trim (s)`
+### [procedure] `(s-trim s)`
 
 Remove whitespace at the beginning and end of `s`.
 
