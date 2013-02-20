@@ -276,6 +276,12 @@
   (define (s-capitalized? s)
     (s-equals? s (s-capitalize s)))
 
+;;; s-titleized? (s)
+;;; In s, is the first letter of each word upper case, and all other
+;;; letters lower case?
+  (define (s-titleized? s)
+    (s-equals? s (s-titleize s)))
+
 ;;; s-numeric? (s)
 ;;; Is s a number?
   (define (s-numeric? s)

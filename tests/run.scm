@@ -121,6 +121,10 @@
 (s-capitalized? "I am capitalized") ;; => #t
 (s-capitalized? "I Am Titleized") ;; => #f
 
+(s-titleized? "Titleized") ;; => #t
+(s-titleized? "I Am Titleized") ;; => #t
+(s-titleized? "I am only capitalized") ;; => #f
+
 (s-numeric? "123") ;; => #t
 (s-numeric? "onetwothree") ;; => #f
 
