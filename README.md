@@ -27,73 +27,73 @@ Procedures
 ### Tweak whitespace
 
 * [s-trim](#procedure-s-trim-s) `(s)`
-* [s-trim-left](#s-trim-left-s) `(s)`
-* [s-trim-right](#s-trim-right-s) `(s)`
-* [s-chomp](#s-chomp-s) `(s)`
-* [s-collapse-whitespace](#s-collapse-whitespace-s) `(s)`
-* [s-center](#s-center-len-s) `(len s)`
+* [s-trim-left](#procedure-s-trim-left-s) `(s)`
+* [s-trim-right](#procedure-s-trim-right-s) `(s)`
+* [s-chomp](#procedure-s-chomp-s) `(s)`
+* [s-collapse-whitespace](#procedure-s-collapse-whitespace-s) `(s)`
+* [s-center](#procedure-s-center-len-s) `(len s)`
 
 ### To shorter string
 
-* [s-truncate](#s-truncate-len-s) `(len s)`
-* [s-left](#s-left-len-s) `(len s)`
-* [s-right](#s-right-len-s) `(len s)`
-* [s-chop-suffix](#s-chop-suffix-suffix-s) `(suffix s)`
-* [s-chop-suffixes](#s-chop-suffixes-suffixes-s) `(suffixes s)`
-* [s-chop-prefix](#s-chop-prefix-prefix-s) `(prefix s)`
-* [s-chop-prefixes](#s-chop-prefixes-prefixes-s) `(prefixes s)`
-* [s-shared-start](#s-shared-start-s1-s2) `(s1 s2)`
-* [s-shared-end](#s-shared-end-s1-s2) `(s1 s2)`
+* [s-truncate](#procedure-s-truncate-len-s) `(len s)`
+* [s-left](#procedure-s-left-len-s) `(len s)`
+* [s-right](#procedure-s-right-len-s) `(len s)`
+* [s-chop-suffix](#procedure-s-chop-suffix-suffix-s) `(suffix s)`
+* [s-chop-suffixes](#procedure-s-chop-suffixes-suffixes-s) `(suffixes s)`
+* [s-chop-prefix](#procedure-s-chop-prefix-prefix-s) `(prefix s)`
+* [s-chop-prefixes](#procedure-s-chop-prefixes-prefixes-s) `(prefixes s)`
+* [s-shared-start](#procedure-s-shared-start-s1-s2) `(s1 s2)`
+* [s-shared-end](#procedure-s-shared-end-s1-s2) `(s1 s2)`
 
 ### To longer string
 
-* [s-repeat](#s-repeat-num-s) `(num s)`
-* [s-concat](#s-concat-rest-strings) `(... strings)`
-* [s-prepend](#s-prepend-prefix-s) `(prefix s)`
-* [s-append](#s-append-suffix-s) `(suffix s)`
+* [s-repeat](#procedure-s-repeat-num-s) `(num s)`
+* [s-concat](#procedure-s-concat-rest-strings) `(... strings)`
+* [s-prepend](#procedure-s-prepend-prefix-s) `(prefix s)`
+* [s-append](#procedure-s-append-suffix-s) `(suffix s)`
 
 ### To and from lists
 
-* [s-lines](#s-lines-s) `(s)`
-* [s-match](#s-match-regexp-s) `(regexp s)`
-* [s-match-multiple](#s-match-multiple-s) `(regexp s)`
-* [s-split](#s-split-s) `(separators s [keepempty])`
-* [s-join](#s-join-separator-strings) `(separator strings)`
+* [s-lines](#procedure-s-lines-s) `(s)`
+* [s-match](#procedure-s-match-regexp-s) `(regexp s)`
+* [s-match-multiple](#procedure-s-match-multiple-s) `(regexp s)`
+* [s-split](#procedure-s-split-s) `(separators s [keepempty])`
+* [s-join](#procedure-s-join-separator-strings) `(separator strings)`
 
 ### Predicates
 
-* [s-equals?](#s-equals-s1-s2) `(s1 s2)`
-* [s-matches?](#s-matches-regexp-s) `(regexp s)`
-* [s-blank?](#s-blank-s) `(s)`
-* [s-ends-with?](#s-ends-with-suffix-s-optional-ignore-case) `(suffix s [ignore-case])`
-* [s-starts-with?](#s-starts-with-prefix-s-optional-ignore-case) `(prefix s [ignore-case])`
-* [s-contains?](#s-contains-needle-s-optional-ignore-case) `(needle s [ignore-case])`
-* [s-lowercase?](#s-lowercase-s) `(s)`
-* [s-uppercase?](#s-uppercase-s) `(s)`
-* [s-mixedcase?](#s-mixedcase-s) `(s)`
-* [s-capitalized?](#s-capitalized-s) `(s)`
-* [s-titleized?](#s-titleized-s)`(s)`
-* [s-numeric?](#s-numeric-s) `(s)`
+* [s-equals?](#procedure-s-equals-s1-s2) `(s1 s2)`
+* [s-matches?](#procedure-s-matches-regexp-s) `(regexp s)`
+* [s-blank?](#procedure-s-blank-s) `(s)`
+* [s-ends-with?](#procedure-s-ends-with-suffix-s-optional-ignore-case) `(suffix s [ignore-case])`
+* [s-starts-with?](#procedure-s-starts-with-prefix-s-optional-ignore-case) `(prefix s [ignore-case])`
+* [s-contains?](#procedure-s-contains-needle-s-optional-ignore-case) `(needle s [ignore-case])`
+* [s-lowercase?](#procedure-s-lowercase-s) `(s)`
+* [s-uppercase?](#procedure-s-uppercase-s) `(s)`
+* [s-mixedcase?](#procedure-s-mixedcase-s) `(s)`
+* [s-capitalized?](#procedure-s-capitalized-s) `(s)`
+* [s-titleized?](#procedure-s-titleized-s)`(s)`
+* [s-numeric?](#procedure-s-numeric-s) `(s)`
 
 ### The misc bucket
 
-* [s-replace](#s-replace-old-new-s) `(old new s)`
-* [s-downcase](#s-downcase-s) `(s)`
-* [s-upcase](#s-upcase-s) `(s)`
-* [s-capitalize](#s-capitalize-s) `(s)`
-* [s-titleize](#s-titleize-s) `(s)`
-* [s-index-of](#s-index-of-needle-s-optional-ignore-case) `(needle s [ignore-case])`
-* [s-reverse](#s-reverse-s) `(s)`
+* [s-replace](#procedure-s-replace-old-new-s) `(old new s)`
+* [s-downcase](#procedure-s-downcase-s) `(s)`
+* [s-upcase](#procedure-s-upcase-s) `(s)`
+* [s-capitalize](#procedure-s-capitalize-s) `(s)`
+* [s-titleize](#procedure-s-titleize-s) `(s)`
+* [s-index-of](#procedure-s-index-of-needle-s-optional-ignore-case) `(needle s [ignore-case])`
+* [s-reverse](#procedure-s-reverse-s) `(s)`
 
 ### Pertaining to words
 
-* [s-split-words](#s-split-words-s) `(s)`
-* [s-lower-camel-case](#s-lower-camel-case-s) `(s)`
-* [s-upper-camel-case](#s-upper-camel-case-s) `(s)`
-* [s-snake-case](#s-snake-case-s) `(s)`
-* [s-dashed-words](#s-dashed-words-s) `(s)`
-* [s-capitalized-words](#s-capitalized-words-s) `(s)`
-* [s-titleized-words](#s-titleized-words-s) `(s)`
+* [s-split-words](#procedure-s-split-words-s) `(s)`
+* [s-lower-camel-case](#procedure-s-lower-camel-case-s) `(s)`
+* [s-upper-camel-case](#procedure-s-upper-camel-case-s) `(s)`
+* [s-snake-case](#procedure-s-snake-case-s) `(s)`
+* [s-dashed-words](#procedure-s-dashed-words-s) `(s)`
+* [s-capitalized-words](#procedure-s-capitalized-words-s) `(s)`
+* [s-titleized-words](#procedure-s-titleized-words-s) `(s)`
 
 ## Documentation and examples
 
@@ -108,7 +108,7 @@ Remove whitespace at the beginning and end of `s`.
 (s-trim " only  trims beg and end  ") ;; => "only  trims beg and end"
 ```
 
-### s-trim-left `(s)`
+### [procedure] `(s-trim-left s)`
 
 Remove whitespace at the beginning of `s`.
 
@@ -117,7 +117,7 @@ Remove whitespace at the beginning of `s`.
 (s-trim-left " this") ;; => "this"
 ```
 
-### s-trim-right `(s)`
+### [procedure] `(s-trim-right s)`
 
 Remove whitespace at the end of `s`.
 
@@ -126,7 +126,7 @@ Remove whitespace at the end of `s`.
 (s-trim-right " this") ;; => " this"
 ```
 
-### s-chomp `(s)`
+### [procedure] `(s-chomp s)`
 
 Remove one trailing `\n`, `\r` or `\r\n` from `s`.
 
@@ -136,7 +136,7 @@ Remove one trailing `\n`, `\r` or `\r\n` from `s`.
 (s-chomp "some newlines\n\n") ;; => "some newlines\n"
 ```
 
-### s-collapse-whitespace `(s)`
+### [procedure] `(s-collapse-whitespace s)`
 
 Convert all adjacent whitespace characters to a single space.
 
@@ -145,7 +145,7 @@ Convert all adjacent whitespace characters to a single space.
 (s-collapse-whitespace "collapse \n all \t sorts of \r whitespace") ;; => "collapse all sorts of whitespace"
 ```
 
-### s-center `(len s)`
+### [procedure] `(s-center len s)`
 
 If `s` is shorter than `len`, pad it with spaces so it is centered.
 
@@ -156,7 +156,7 @@ If `s` is shorter than `len`, pad it with spaces so it is centered.
 ```
 
 
-### s-truncate `(len s)`
+### [procedure] `(s-truncate len s)`
 
 If `s` is longer than `len`, cut it down and add ... at the end.
 
@@ -166,7 +166,7 @@ If `s` is longer than `len`, cut it down and add ... at the end.
 (s-truncate 16 "But this is not!") ;; => "But this is not!"
 ```
 
-### s-left `(len s)`
+### [procedure] `(s-left len s)`
 
 Returns up to the `len` first chars of `s`.
 
@@ -175,7 +175,7 @@ Returns up to the `len` first chars of `s`.
 (s-left 3 "li") ;; => "li"
 ```
 
-### s-right `(len s)`
+### [procedure] `(s-right len s)`
 
 Returns up to the `len` last chars of `s`.
 
@@ -184,7 +184,7 @@ Returns up to the `len` last chars of `s`.
 (s-right 3 "li") ;; => "li"
 ```
 
-### s-chop-suffix `(suffix s)`
+### [procedure] `(s-chop-suffix suffix s)`
 
 Remove `suffix` if it is at end of `s`.
 
@@ -194,7 +194,7 @@ Remove `suffix` if it is at end of `s`.
 (s-chop-suffix "\n" "some newlines\n\n") ;; => "some newlines\n"
 ```
 
-### s-chop-suffixes `(suffixes s)`
+### [procedure] `(s-chop-suffixes suffixes s)`
 
 Remove `suffixes` one by one in order, if they are at the end of `s`.
 
@@ -204,7 +204,7 @@ Remove `suffixes` one by one in order, if they are at the end of `s`.
 (s-chop-suffixes '("\n" "\r") "penguin\r\n") ;; => "penguin"
 ```
 
-### s-chop-prefix `(prefix s)`
+### [procedure] `(s-chop-prefix prefix s)`
 
 Remove `prefix` if it is at the start of `s`.
 
@@ -213,7 +213,7 @@ Remove `prefix` if it is at the start of `s`.
 (s-chop-prefix "/tmp" "/tmp/tmp/file.js") ;; => "/tmp/file.js"
 ```
 
-### s-chop-prefixes `(prefixes s)`
+### [procedure] `(s-chop-prefixes prefixes s)`
 
 Remove `prefixes` one by one in order, if they are at the start of `s`.
 
@@ -222,7 +222,7 @@ Remove `prefixes` one by one in order, if they are at the start of `s`.
 (s-chop-prefixes '("/my" "/tmp") "/tmp/my/file.js") ;; => "/my/file.js"
 ```
 
-### s-shared-start `(s1 s2)`
+### [procedure] `(s-shared-start s1 s2)`
 
 Returns the longest prefix `s1` and `s2` have in common.
 
@@ -232,7 +232,7 @@ Returns the longest prefix `s1` and `s2` have in common.
 (s-shared-start "bar" "foo") ;; => ""
 ```
 
-### s-shared-end `(s1 s2)`
+### [procedure] `(s-shared-end s1 s2)`
 
 Returns the longest suffix `s1` and `s2` have in common.
 
@@ -243,7 +243,7 @@ Returns the longest suffix `s1` and `s2` have in common.
 ```
 
 
-### s-repeat `(num s)`
+### [procedure] `(s-repeat num s)`
 
 Make a string of `s` repeated `num` times.
 
@@ -252,7 +252,7 @@ Make a string of `s` repeated `num` times.
 (s-concat (s-repeat 8 "Na") " Batman!") ;; => "NaNaNaNaNaNaNaNa Batman!"
 ```
 
-### s-concat `(... strings)`
+### [procedure] `(s-concat s ...)`
 
 Join all the string arguments into one string.
 
@@ -260,7 +260,7 @@ Join all the string arguments into one string.
 (s-concat "abc" "def" "ghi") ;; => "abcdefghi"
 ```
 
-### s-prepend `(prefix s)`
+### [procedure] `(s-prepend prefix s)`
 
 Concatenate `prefix` and `s`.
 
@@ -268,7 +268,7 @@ Concatenate `prefix` and `s`.
 (s-prepend "abc" "def") ;; => "abcdef"
 ```
 
-### s-append `(suffix s)`
+### [procedure] `(s-append suffix s)`
 
 Concatenate `s` and `suffix`.
 
@@ -277,7 +277,7 @@ Concatenate `s` and `suffix`.
 ```
 
 
-### s-lines `(s)`
+### [procedure] `(s-lines s)`
 
 Splits `s` into a list of strings on newline characters.
 
@@ -287,7 +287,7 @@ Splits `s` into a list of strings on newline characters.
 (s-lines "abc\r\ndef\r\nghi") ;; => '("abc" "def" "ghi")
 ```
 
-### s-match `(regexp s)`
+### [procedure] `(s-match regexp s)`
 
 When the given expression matches the string, this function returns a
 list of the whole matching string and a string for each matched
@@ -300,7 +300,7 @@ list '().
 (s-match "^.*/([a-z]+).([a-z]+)" "/some/weird/file.html") ;; => '("/some/weird/file.html" "file" "html")
 ```
 
-### s-match-multiple `(regexp s)`
+### [procedure] `(s-match-multiple regexp s)`
 
 Returns a list of all matches to `regexp` in `s`.
 ```scheme
@@ -309,7 +309,7 @@ Returns a list of all matches to `regexp` in `s`.
 (s-match-multiple "foo-[0-9]{2}" "foo-10 foo-11 foo-1 foo-2 foo-100 foo-21") ;; => ("foo-10" "foo-11" "foo-10" "foo-21")
 ```
 
-### s-split `(separators s [keepempty])`
+### [procedure] `(s-split separators s [keepempty])`
 
 Splits `s` into substrings bounded by matches for `separators`. If
 `keepempty` is #t, zero-length substrings are returned.
@@ -320,7 +320,7 @@ Splits `s` into substrings bounded by matches for `separators`. If
 (s-split ":," "foo:bar:baz,quux,zot") ;; => ("foo" "bar" "baz" "quux" "zot")
 ```
 
-### s-join `(separator strings)`
+### [procedure] `(s-join separator strings)`
 
 Join all the strings in `strings` with `separator` in between.
 
@@ -329,7 +329,7 @@ Join all the strings in `strings` with `separator` in between.
 (s-join "\n" '("abc" "def" "ghi")) ;; => "abc\ndef\nghi"
 ```
 
-### s-equals? `(s1 s2)`
+### [procedure] `(s-equals? s1 s2)`
 
 Is `s1` equal to `s2`?
 
@@ -340,7 +340,7 @@ This is a simple wrapper around the built-in `string=`.
 (s-equals? "abc" "abc") ;; => #t
 ```
 
-### s-matches? `(regexp s)`
+### [procedure] `(s-matches? regexp s)`
 
 Does `regexp` match `s`?
 
@@ -349,7 +349,7 @@ Does `regexp` match `s`?
 (s-matches? "^[0-9]+$" "a123") ;; => #f
 ```
 
-### s-blank? `(s)`
+### [procedure] `(s-blank? s)`
 
 Is `s` the empty string?
 
@@ -358,7 +358,7 @@ Is `s` the empty string?
 (s-blank? " ") ;; => #f
 ```
 
-### s-ends-with? `(suffix s [ignore-case])`
+### [procedure] `(s-ends-with? suffix s [ignore-case])`
 
 Does `s` end with `suffix`?
 
@@ -373,7 +373,7 @@ Alias: `s-suffix?`
 (s-ends-with? ".MD" "readme.md" #t) ;; => #t
 ```
 
-### s-starts-with? `(prefix s [ignore-case])`
+### [procedure] `(s-starts-with? prefix s [ignore-case])`
 
 Does `s` start with `prefix`?
 
@@ -386,7 +386,7 @@ attention to case differences.
 (s-starts-with? "LIB/" "lib/file.js" #t) ;; => #t
 ```
 
-### s-contains? `(needle s [ignore-case])`
+### [procedure] `(s-contains? needle s [ignore-case])`
 
 Does `s` contain `needle`?
 
@@ -399,7 +399,7 @@ attention to case differences.
 (s-contains? "^a" "it's not ^a regexp") ;; => #t
 ```
 
-### s-lowercase? `(s)`
+### [procedure] `(s-lowercase? s)`
 
 Are all the letters in `s` in lower case?
 
@@ -409,7 +409,7 @@ Are all the letters in `s` in lower case?
 (s-lowercase? "123?") ;; => #t
 ```
 
-### s-uppercase? `(s)`
+### [procedure] `(s-uppercase? s)`
 
 Are all the letters in `s` in upper case?
 
@@ -419,7 +419,7 @@ Are all the letters in `s` in upper case?
 (s-uppercase? "123?") ;; => #t
 ```
 
-### s-mixedcase? `(s)`
+### [procedure] `(s-mixedcase? s)`
 
 Are there both lower case and upper case letters in `s`?
 
@@ -429,7 +429,7 @@ Are there both lower case and upper case letters in `s`?
 (s-mixedcase? "123?") ;; => #f
 ```
 
-### s-capitalized? `(s)`
+### [procedure] `(s-capitalized? s)`
 In `s`, is the first letter upper case, and all other letters lower case?
 ```scheme
 (s-capitalized? "Capitalized") ;; => #t
@@ -437,7 +437,7 @@ In `s`, is the first letter upper case, and all other letters lower case?
 (s-capitalized? "I Am Titleized") ;; => #f
 ```
 
-### s-titleized? `(s)`
+### [procedure] `(s-titleized? s)`
 In s, is the first letter of each word upper case, and all other
 letters lower case?
 ```scheme
@@ -446,7 +446,7 @@ letters lower case?
 (s-titleized? "I am only capitalized") ;; => #f
 ```
 
-### s-numeric? `(s)`
+### [procedure] `(s-numeric? s)`
 
 Is `s` a number?
 
@@ -455,7 +455,7 @@ Is `s` a number?
 (s-numeric? "onetwothree") ;; => #f
 ```
 
-### s-replace `(old new s)`
+### [procedure] `(s-replace old new s)`
 
 Replaces `old` with `new` in `s`.
 
@@ -464,7 +464,7 @@ Replaces `old` with `new` in `s`.
 (s-replace "^a" "---" "it's not ^a regexp") ;; => "it's not --- regexp"
 ```
 
-### s-downcase `(s)`
+### [procedure] `(s-downcase s)`
 
 Convert `s` to lower case.
 
@@ -474,7 +474,7 @@ This is a simple wrapper around  `string-downcase`.
 (s-downcase "ABC") ;; => "abc"
 ```
 
-### s-upcase `(s)`
+### [procedure] `(s-upcase s)`
 
 Convert `s` to upper case.
 
@@ -484,7 +484,7 @@ This is a simple wrapper around `string-upcase`.
 (s-upcase "abc") ;; => "ABC"
 ```
 
-### s-capitalize `(s)`
+### [procedure] `(s-capitalize s)`
 
 Convert the first word's first character to upper case and the rest to lower case in `s`.
 
@@ -493,7 +493,7 @@ Convert the first word's first character to upper case and the rest to lower cas
 (s-capitalize "abc.DEF") ;; => "Abc.def"
 ```
 
-### s-titleize `(s)`
+### [procedure] `(s-titleize s)`
 
 Convert each word's first character to upper case and the rest to lower case in `s`.
 
@@ -504,7 +504,7 @@ This is a simple wrapper around  `string-titlecase`.
 (s-titleize "abc.DEF") ;; => "Abc.Def"
 ```
 
-### s-index-of `(needle s [ignore-case])`
+### [procedure] `(s-index-of needle s [ignore-case])`
 
 Returns first index of `needle` in `s`, or #f.
 
@@ -517,7 +517,7 @@ attention to case differences.
 (s-index-of "n.t" "not a regexp") ;; => #f
 ```
 
-### s-reverse `(s)`
+### [procedure] `(s-reverse s)`
 
 Return the reverse of `s`.
 
@@ -527,7 +527,7 @@ Return the reverse of `s`.
 (s-reverse "") ;; => ""
 ```
 
-### s-split-words `(s)`
+### [procedure] `(s-split-words s)`
 
 Split `s` into list of words.
 
@@ -537,7 +537,7 @@ Split `s` into list of words.
 (s-split-words "evenCamelCase") ;; => '("even" "Camel" "Case")
 ```
 
-### s-lower-camel-case `(s)`
+### [procedure] `(s-lower-camel-case s)`
 
 Convert `s` to lowerCamelCase.
 
@@ -547,7 +547,7 @@ Convert `s` to lowerCamelCase.
 (s-lower-camel-case "under_scored_words") ;; => "underScoredWords"
 ```
 
-### s-upper-camel-case `(s)`
+### [procedure] `(s-upper-camel-case s)`
 
 Convert `s` to UpperCamelCase.
 
@@ -557,7 +557,7 @@ Convert `s` to UpperCamelCase.
 (s-upper-camel-case "under_scored_words") ;; => "UnderScoredWords"
 ```
 
-### s-snake-case `(s)`
+### [procedure] `(s-snake-case s)`
 
 Convert `s` to snake_case.
 
@@ -567,7 +567,7 @@ Convert `s` to snake_case.
 (s-snake-case "camelCasedWords") ;; => "camel_cased_words"
 ```
 
-### s-dashed-words `(s)`
+### [procedure] `(s-dashed-words s)`
 
 Convert `s` to dashed-words.
 
@@ -577,7 +577,7 @@ Convert `s` to dashed-words.
 (s-dashed-words "camelCasedWords") ;; => "camel-cased-words"
 ```
 
-### s-capitalized-words `(s)`
+### [procedure] `(s-capitalized-words s)`
 
 Convert `s` to Capitalized Words.
 
@@ -587,7 +587,7 @@ Convert `s` to Capitalized Words.
 (s-capitalized-words "camelCasedWords") ;; => "Camel cased words"
 ```
 
-### s-titleized-words `(s)`
+### [procedure] `(s-titleized-words s)`
 
 Convert `s` to Titleized Words.
 
