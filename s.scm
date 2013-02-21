@@ -32,12 +32,12 @@
 ;; provide a unified string system for users.
 
 ;;; TODO: Create these procedures: s-word-wrap, s-with,
-;;; s-format, s-unique-words
+;;; s-format
 
 (module s *
   
   (import scheme chicken)
-  (use data-structures regex srfi-1 srfi-13)
+  (use irregex data-structures srfi-1 srfi-13)
 
 ;;; s-trim (s)
 ;;; Remove whitespace at the beginning and end of s
@@ -66,7 +66,7 @@
 ;;; This can be accomplished with the unit regex egg in chicken. I add
 ;;; this wrapper for convenience
   (define (s-collapse-whitespace s)
-    (string-substitute "[[:space:]|\r]+" " " s #t))
+    (irregex-replace/all "[[:space:]|\r]+" s " "))
 
 ;;; s-word-wrap (len s)
 ;;; If s is longer than len, wrap the words with newlines.
@@ -87,8 +87,10 @@
 ;;; s-truncate (len s)
 ;;; If s is longer than len, cut it down and add ... at the end. 
   (define (s-truncate len s)
-    (let ((tmp (string->list s)))
-      (string-append (list->string (take tmp len)) "...")))
+    (if (> (string-length s) len)
+	(let ((tmp (string->list s)))
+	  (conc (list->string (take tmp (- len 3))) "..."))
+	s))
 
 ;;; s-left (len s)
 ;;; Returns up to the len first chars of s.
@@ -110,7 +112,7 @@
 ;;; s-chop-suffix (suffix s)
 ;;; Remove suffix if it is at the end of s.
   (define (s-chop-suffix suffix s)
-    (string-substitute (string-append suffix "$") "" s))
+    (string-chomp s suffix))
 
 ;;; s-chop-suffixes (suffixes s)
 ;;; Remove suffixes one by one in order, if they are at the end of s.
@@ -124,7 +126,7 @@
 ;;; s-chop-prefix (prefix s)
 ;;; Remove prefix if it is at the start of s
   (define (s-chop-prefix prefix s)
-    (string-substitute (string-append "^" prefix) "" s))
+    (irregex-replace (conc "^" prefix) s ""))
 
 ;;; s-chop-prefixes (prefixes s)
 ;;; Remove prefixes one by one in order, if they are at the start of
@@ -151,26 +153,23 @@
   (define (s-repeat num s)
     (cond
      ((= 0 num) "")
-     (else (string-append s (s-repeat (- num 1) s)))))
+     (else (conc s (s-repeat (- num 1) s)))))
 
 ;;; s-concat (&rest strings)
 ;;; Join all the string arguments into one string.
-;;; This is a wrapper provided purely for convenience. It offers
-;;; nothing new over string-append, and possibly slows it down for
-;;; large numbers of strings.
   (define s-concat
     (lambda args
-      (apply string-append args)))
+      (apply conc args)))
 
 ;;; s-prepend (prefix s)
 ;;; Concatenate prefix and s
   (define (s-prepend prefix s)
-    (string-append prefix s))
+    (conc prefix s))
 
 ;;; s-append (suffix s)
 ;;; Concatenate s and suffix
   (define (s-append suffix s)
-    (string-append s suffix))
+    (conc s suffix))
 
 ;;; s-lines (s)
 ;;; Splits s into a list of strings on newline characters.
@@ -183,17 +182,32 @@
 ;;; matched subexpression. If it did not match the returned value is
 ;;; an empty list (nil).
   (define (s-match regexp s)
-    (let ((result (string-search regexp s)))
-      (if result result '())))
+    (let ((result (irregex-search regexp s)))
+      (if result
+	  (let ((num-matches (irregex-match-num-submatches result)))
+	    (define (list-matches mymatches idx)
+	      (if (> idx num-matches) '()
+		  (cons (irregex-match-substring mymatches idx)
+			(list-matches mymatches (+ idx 1)))))
+	    (list-matches result 0))
+	  '())))
+
+  ;; (define (s-match regexp s)
+  ;;   (let ((result (string-search regexp s)))
+  ;;     (if result result '())))
 
 ;;; s-match-multiple (regexp s)
 ;;; Returns a list of all matches to regexp in s.
+;;; This procedure was greatly simplified using irregex
 (define (s-match-multiple regexp s)
-  (let ((myregexp (s-append ")(.*)" (s-prepend "(" regexp))))
-    (let ((mymatch (s-match myregexp s)))
-      (if (null? mymatch) '()
-	  (cons (cadr mymatch) 
-		(s-match-multiple regexp (car (cddr mymatch))))))))
+  (irregex-extract regexp s))
+
+;; (define (s-match-multiple regexp s)
+;;   (let ((myregexp (s-append ")(.*)" (s-prepend "(" regexp))))
+;;     (let ((mymatch (s-match myregexp s)))
+;;       (if (null? mymatch) '()
+;; 	  (cons (cadr mymatch) 
+;; 		(s-match-multiple regexp (car (cddr mymatch))))))))
 
 ;;; s-split (separators s #!optional keepempty)
 ;;; Splits `s` into substrings bounded by matches for SEPARATORS. If
@@ -206,6 +220,12 @@
   (define (s-join separator strings)
     (string-join strings separator))
 
+;;; s-chop (s len)
+;;; Return a list of substrings taken by chopping {{s}} every {{len}}
+;;; characters. 
+(define (s-chop len s)
+  (string-chop s len))
+
 ;;; s-equals? (s1 s2)
 ;;; Is s1 equal to s2?. This is simple wrapper around the built-in
 ;;; string= 
@@ -215,7 +235,7 @@
 ;;; s-matches? (regexp s)
 ;;; Does regexp match s?
   (define (s-matches? regexp s)
-    (if (string-match regexp s) #t #f))
+    (irregex-match-data? (irregex-match regexp s)))
 
 ;;; n-blank? (s)
 ;;; Is s null (an empty string)?
@@ -227,16 +247,24 @@
 ;;; ignored. 
   (define (s-ends-with? suffix s #!optional (ignore-case #f))
     (if ignore-case
-	(string-suffix-ci? suffix s)
-	(string-suffix? suffix s)))
+	(s-starts-with? (s-reverse suffix) (s-reverse s) #t)
+	(s-starts-with? (s-reverse suffix) (s-reverse s))))
+
+
+  ;; (define (s-ends-with? suffix s #!optional (ignore-case #f))
+  ;;   (if ignore-case
+  ;; 	(string-suffix-ci? suffix s)
+  ;; 	(string-suffix? suffix s)))
 
 ;;; s-starts-with? (prefix s #!optional ignore-case)
 ;;; Does s start with suffix? If ignore-case is #t, case comparison is
 ;;; ignored. 
   (define (s-starts-with? prefix s #!optional (ignore-case #f))
     (if ignore-case
-	(string-prefix-ci? prefix s)
-	(string-prefix? prefix s)))
+	(let ((mymatch (substring-index-ci prefix s)))
+	  (if (and mymatch (= mymatch 0)) #t #f))
+	(let ((mymatch (substring-index prefix s)))
+	  (if (and mymatch (= mymatch 0)) #t #f))))
 
 ;;; s-contains? (needle s #!optional ignore-case)
 ;;; Does s contain needle?. If ignore-case is #t, case comparison is
@@ -265,8 +293,8 @@
 ;;; s-mixedcase? (s)
 ;;; Are there both lower case and upper case letters in s?
   (define (s-mixedcase? s)
-    (if (and (string-match ".*[a-z]+.*" s) 
-	     (string-match ".*[A-Z]+.*" s))
+    (if (and (irregex-match ".*[a-z]+.*" s) 
+	     (irregex-match ".*[A-Z]+.*" s))
 	#t
 	#f))
 
@@ -285,12 +313,12 @@
 ;;; s-numeric? (s)
 ;;; Is s a number?
   (define (s-numeric? s)
-    (if (string-match "[0-9]+" s) #t #f))
+    (if (irregex-match "[0-9]+" s) #t #f))
 
 ;;; s-replace (old new s)
 ;;; Replaces old with new in s (old is NOT a regexp)
   (define (s-replace old new s)
-    (string-substitute (regexp-escape old) new s))
+    (irregex-replace/all (irregex-quote old) s new))
 
 ;;; s-downcase (s)
 ;;; Convert s to lower case
@@ -344,13 +372,12 @@
 
 ;;; s-split-words (s)
 ;;; Split s into list of words
-;;; The string-substitute call converts "camelCase" to "camel Case".
   (define (s-split-words s)
-    (string-split-fields 
+    (irregex-extract 
      "\\w+"
-     (string-substitute "_+" " " (string-substitute
-				  "([a-z])([A-Z])"
-				  "\\1 \\2" s #t) #t)))
+     (irregex-replace/all "_+" (irregex-replace/all
+				"(?<!^)(?=[A-Z])" s " ") " ")))
+
 ;;; s-lower-camel-case (s)
 ;;; Convert s to lowerCamelCase
   (define (s-lower-camel-case s)

@@ -8,38 +8,23 @@
 
 String manipulation egg for chicken scheme. 
 
-=== Author
+The ''s'' egg aims to provide many convenient procedures for working
+with strings. Some of these functions are simply wrappers around
+existing scheme procedures. In the spirit of s.el, such wrappers exist
+to provide users with a consistent API for quickly and easily
+manipulating strings in Chicken Scheme without searching documentation
+across multiple modules.
 
-[[/users/Nicholas Van Horn|Nicholas Van Horn]]
+An attempt has been made to organize procedures according to their
+categorical behavior. Available procedures are listed by category
+below, followed by documentation and examples.
 
-=== Requirements
+Many of the functions defined here were inspired by the Emacs lisp
+string manipulation library "s.el" created by Magnar Sveen (and
+others) at [[https://github.com/magnars/s.el]]. 
 
-[[data-structures]]
-[[regex]]
-[[srfi-1]]
-[[srfi-13]]
+* '''Tweak whitespace'''
 
-=== Repository
-
-The git repository for the s source code is hosted by github:
-[[https://github.com/n3mo/strings|https://github.com/n3mo/strings]].
-
-=== Documentation
-
-This library is currently under active development and is subject to
-change. The functions defined here were inspired by the Emacs lisp
-string manipulation library "s" created by Magnar Sveen (and others)
-at <https://github.com/magnars/s.el>. As such, many procedures are a
-direct reimplementation of their Elisp counterparts (however, novel
-procedures have been defined as well). Some of these functions are
-simply wrappers around existing scheme procedures. In the spirit of
-s.el, such wrappers exist to provide users with a consistent API for
-quickly and easily manipulating strings in Chicken Scheme without
-searching documentation across multiple modules.
-
-=== Procedures Defined
-
-* Tweak whitespace
 ** s-trim
 ** s-trim-left
 ** s-trim-right
@@ -47,7 +32,8 @@ searching documentation across multiple modules.
 ** s-collapse-whitespace
 ** s-center
 
-* To shorter string
+* '''To shorter string'''
+
 ** s-truncate
 ** s-left
 ** s-right
@@ -58,20 +44,24 @@ searching documentation across multiple modules.
 ** s-shared-start
 ** s-shared-end
 
-* To longer string
+* '''To longer string'''
+
 ** s-repeat
 ** s-concat
 ** s-prepend
 ** s-append
 
-* To and from lists
+* '''To and from lists'''
+
 ** s-lines
 ** s-match
 ** s-match-multiple
 ** s-split
 ** s-join
+** s-chop
 
-* Predicates
+* '''Predicates'''
+
 ** s-equals?
 ** s-matches?
 ** s-blank?
@@ -85,7 +75,8 @@ searching documentation across multiple modules.
 ** s-titleized?
 ** s-numeric?
 
-* The misc bucket
+* '''The misc bucket'''
+
 ** s-replace
 ** s-downcase
 ** s-upcase
@@ -94,7 +85,8 @@ searching documentation across multiple modules.
 ** s-index-of
 ** s-reverse
 
-* Pertaining to words
+* '''Pertaining to words'''
+
 ** s-split-words
 ** s-lower-camel-case
 ** s-upper-camel-case
@@ -103,6 +95,25 @@ searching documentation across multiple modules.
 ** s-capitalized-words
 ** s-titleized-words
 ** s-unique-words
+
+=== Author
+
+[[/users/Nicholas Van Horn|Nicholas Van Horn]]
+
+=== Requirements
+
+The following units are required:
+
+[[data-structures]]
+[[srfi-1]]
+[[srfi-13]]
+
+=== Repository
+
+The git repository for the s source code is hosted by github:
+[[https://github.com/n3mo/s|https://github.com/n3mo/s]].
+
+=== Documentation 
 
 ==== s-trim
 
@@ -380,6 +391,17 @@ Join all the strings in {{strings}} with {{separator}} in between.
 <enscript highlight="scheme">
 (s-join "+" '("abc" "def" "ghi")) ;; => "abc+def+ghi"
 (s-join "\n" '("abc" "def" "ghi")) ;; => "abc\ndef\nghi"
+</enscript>
+
+==== s-chop
+
+<procedure> (s-chop s len)</procedure>
+
+Return a list of substrings taken by chopping {{s}} every {{len}} characters.
+
+<enscript highlight="scheme">
+(s-chop 4 "1234567890") ;; => ("1234" "5678" "90")
+(s-chop 3 "i-1i-2i-3i-4i-5") ;; => ("i-1" "i-2" "i-3" "i-4" "i-5")
 </enscript>
 
 ==== s-equals?
@@ -714,6 +736,10 @@ Return list of unique words in {{s}}.
 (s-unique-words "camelCase_words and_and underscore_words_too") ;; => ("camel" "Case" "and" "underscore" "words" "too")
 </enscript>
 
+=== Examples
+
+Multiple examples for each procedure are given above.
+
 === Changelog
 
 * 1.0 Initial release
@@ -721,8 +747,9 @@ Return list of unique words in {{s}}.
 === License
 
 Copyright (C) 2013 Nicholas M. Van Horn
+Original Elisp Library Copyright (C) 2012 Magnar Sveen
 
-Author: Nicholas M. Van Horn <vanhorn.nm@gmail.com>
+Author: Nicholas M. Van Horn
 Keywords: chicken, scheme, string
 
 This program is free software; you can redistribute it and/or modify
@@ -736,4 +763,4 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
+along with this program.  If not, see [[http://www.gnu.org/licenses/]].
