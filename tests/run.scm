@@ -84,6 +84,9 @@
 (s-join "+" '("abc" "def" "ghi")) ;; => "abc+def+ghi"
 (s-join "\n" '("abc" "def" "ghi")) ;; => "abc\ndef\nghi"
 
+(s-chop 4 "1234567890") ;; => ("1234" "5678" "90")
+(s-chop 3 "i-1i-2i-3i-4i-5") ;; => ("i-1" "i-2" "i-3" "i-4" "i-5")
+
 (s-equals? "abc" "ABC") ;; => #f
 (s-equals? "abc" "abc") ;; => #t
 
