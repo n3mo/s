@@ -1,4 +1,4 @@
-;;; strings.scm --- Strings Egg For Chicken Scheme
+;;; s.scm --- Strings Egg For Chicken Scheme
 
 ;; Copyright 2013, Nicholas M. Van Horn
 ;; Inspired by: https://github.com/magnars/s.el
@@ -34,7 +34,7 @@
 ;;; TODO: Create these procedures: s-word-wrap, s-with,
 ;;; s-format, s-unique-words
 
-(module strings *
+(module s *
   
   (import scheme chicken)
   (use data-structures regex srfi-1 srfi-13)
@@ -396,4 +396,4 @@
     (unique mywords)))
 
 )
-;;; strings.scm ends here.
+;;; s.scm ends here.

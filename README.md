@@ -1,16 +1,16 @@
-Strings
+S
 =======
 
 String manipulation egg for chicken scheme. 
 
-This library is currently under active development and is subject to change. The functions defined here were inspired by the Emacs lisp string manipulation library "s" created by Magnar Sveen (and others) at <https://github.com/magnars/s.el>. As such, many procedures are a direct port of their Elisp counterparts (however, novel procedures have been defined as well). Some of these functions are simply wrappers around existing scheme procedures. In the spirit of s.el, such wrappers exist to provide users with a consistent API for quickly and easily manipulating strings in Chicken Scheme without searching documentation across multiple modules.
+This library is currently under active development and is subject to change. The functions defined here were inspired by the Emacs lisp string manipulation library "s" created by Magnar Sveen (and others) at <https://github.com/magnars/s.el>. As such, many procedures are a direct reimplementation of their Elisp counterparts (however, novel procedures have been defined as well). Some of these functions are simply wrappers around existing scheme procedures. In the spirit of s.el, such wrappers exist to provide users with a consistent API for quickly and easily manipulating strings in Chicken Scheme without searching documentation across multiple modules.
 
 Installation
 ============
 
-<i>Strings</i> is designed to work with [Chicken Scheme](http://www.call-cc.org/). The procedures were developed and tested on Chicken 4.8.0 and 4.7.0.6. Your mileage may vary on other versions.
+<i>S</i> is designed to work with [Chicken Scheme](http://www.call-cc.org/). The procedures were developed and tested on Chicken 4.8.0 and 4.7.0.6. Your mileage may vary on other versions.
 
-<i>Strings</i> requires the following dependencies/eggs:
+<i>S</i> requires the following dependencies/eggs:
 
 <pre>
 data-structures
@@ -19,7 +19,7 @@ srfi-1
 srfi-13
 </pre>
 
-<i>Strings</i> is packaged as a module, but it is currently not available with chicken-install. As such, the only way to "install" this library is to save the source to your local computer (perhaps with the command <code> git clone git://github.com/n3mo/strings.git </code>). Then, issue the command <code>(load "~/path/to/strings.scm")</code> either from the csi REPL or from your source file. After loading, you simply import the module with <code>(import strings)</code> and the procedures described below will become available.
+<i>S</i> is packaged as a module, but it is currently not available with chicken-install. As such, the only way to "install" this library is to save the source to your local computer (perhaps with the command <code> git clone git://github.com/n3mo/strings.git </code>). Then, issue the command <code>(load "~/path/to/strings.scm")</code> either from the csi REPL or from your source file. After loading, you simply import the module with <code>(import strings)</code> and the procedures described below will become available.
 
 Procedures
 ==========
@@ -612,7 +612,7 @@ Return list of unique words in s.
 Acknowledgments 
 ===============
 
-This library is mostly a port of the [Emacs lisp s.el library](https://github.com/magnars/s.el). Most of the procedures retain similar functionality to their elisp equivalent. However, this is a scheme library, so functions behave accordingly (e.g., by returning #f rather than nil).
+This library is mostly a reimplementation of the [Emacs lisp s.el library](https://github.com/magnars/s.el). Most of the procedures retain similar functionality to their elisp equivalent. However, this is a scheme library, so functions behave accordingly (e.g., by returning #f rather than nil).
 
 Bugs & Improvements
 ===================

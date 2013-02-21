@@ -1,6 +1,6 @@
-;;;; strings.meta -*- Scheme -*-
+;;;; s.meta -*- Scheme -*-
 
-((license "GPL")
+((license "GPL-3")
  (category misc)
  (needs regex)
  (author "Nicholas M. Van Horn")

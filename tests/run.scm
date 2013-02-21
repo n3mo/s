@@ -1,6 +1,6 @@
-;;; Tests for strings module.
+;;; Tests for s module.
 
-(use strings srfi-13 regex)
+(use s srfi-13 regex)
 
 ;; Tests begin here
 (s-trim "trim ") ;; => "trim"
