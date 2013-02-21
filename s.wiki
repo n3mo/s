@@ -1,0 +1,739 @@
+[[tags: egg]]
+
+== s
+
+[[toc:]]
+
+=== Description
+
+String manipulation egg for chicken scheme. 
+
+=== Author
+
+[[/users/Nicholas Van Horn|Nicholas Van Horn]]
+
+=== Requirements
+
+[[data-structures]]
+[[regex]]
+[[srfi-1]]
+[[srfi-13]]
+
+=== Repository
+
+The git repository for the s source code is hosted by github:
+[[https://github.com/n3mo/strings|https://github.com/n3mo/strings]].
+
+=== Documentation
+
+This library is currently under active development and is subject to
+change. The functions defined here were inspired by the Emacs lisp
+string manipulation library "s" created by Magnar Sveen (and others)
+at <https://github.com/magnars/s.el>. As such, many procedures are a
+direct reimplementation of their Elisp counterparts (however, novel
+procedures have been defined as well). Some of these functions are
+simply wrappers around existing scheme procedures. In the spirit of
+s.el, such wrappers exist to provide users with a consistent API for
+quickly and easily manipulating strings in Chicken Scheme without
+searching documentation across multiple modules.
+
+=== Procedures Defined
+
+* Tweak whitespace
+** s-trim
+** s-trim-left
+** s-trim-right
+** s-chomp
+** s-collapse-whitespace
+** s-center
+
+* To shorter string
+** s-truncate
+** s-left
+** s-right
+** s-chop-suffix
+** s-chop-suffixes
+** s-chop-prefix
+** s-chop-prefixes
+** s-shared-start
+** s-shared-end
+
+* To longer string
+** s-repeat
+** s-concat
+** s-prepend
+** s-append
+
+* To and from lists
+** s-lines
+** s-match
+** s-match-multiple
+** s-split
+** s-join
+
+* Predicates
+** s-equals?
+** s-matches?
+** s-blank?
+** s-ends-with?
+** s-starts-with?
+** s-contains?
+** s-lowercase?
+** s-uppercase?
+** s-mixedcase?
+** s-capitalized?
+** s-titleized?
+** s-numeric?
+
+* The misc bucket
+** s-replace
+** s-downcase
+** s-upcase
+** s-capitalize
+** s-titleize
+** s-index-of
+** s-reverse
+
+* Pertaining to words
+** s-split-words
+** s-lower-camel-case
+** s-upper-camel-case
+** s-snake-case
+** s-dashed-words
+** s-capitalized-words
+** s-titleized-words
+** s-unique-words
+
+==== s-trim
+
+<procedure> (s-trim s)</procedure>
+
+Remove whitespace at the beginning and end of {{s}}.
+
+<enscript highlight="scheme">
+(s-trim "trim ") ;; => "trim"
+(s-trim " this") ;; => "this"
+(s-trim " only  trims beg and end  ") ;; => "only  trims beg and end"
+</enscript>
+
+==== s-trim-left
+
+<procedure> (s-trim-left s)</procedure>
+
+Remove whitespace at the beginning of {{s}}.
+
+<enscript highlight="scheme">
+(s-trim-left "trim ") ;; => "trim "
+(s-trim-left " this") ;; => "this"
+</enscript>
+
+==== s-trim-right
+
+<procedure> (s-trim-right s)</procedure>
+
+Remove whitespace at the end of {{s}}.
+
+<enscript highlight="scheme">
+(s-trim-right "trim ") ;; => "trim"
+(s-trim-right " this") ;; => " this"
+</enscript>
+
+==== s-chomp
+
+<procedure> (s-chomp s)</procedure>
+
+Remove one trailing {{\n}}, {{\r}} or {{\r\n}} from {{s}}.
+
+<enscript highlight="scheme">
+(s-chomp "no newlines\n") ;; => "no newlines"
+(s-chomp "no newlines\r\n") ;; => "no newlines"
+(s-chomp "some newlines\n\n") ;; => "some newlines\n"
+</enscript>
+
+==== s-collapse-whitespace
+
+<procedure> (s-collapse-whitespace s)</procedure>
+
+Convert all adjacent whitespace characters in {{s}} to a single space.
+
+<enscript highlight="scheme">
+(s-collapse-whitespace "only   one space   please") ;; => "only one space please"
+(s-collapse-whitespace "collapse \n all \t sorts of \r whitespace") ;; => "collapse all sorts of whitespace"
+</enscript>
+
+==== s-center
+
+<procedure> (s-center len s)</procedure>
+
+If {{s}} is shorter than {{len}}, pad it with spaces so it is centered.
+
+<enscript highlight="scheme">
+(s-center 5 "a") ;; => "  a  "
+(s-center 5 "ab") ;; => "  ab "
+(s-center 1 "abc") ;; => "abc"
+</enscript>
+
+
+==== s-truncate
+
+<procedure> (s-truncate len s)</procedure>
+
+If {{s}} is longer than {{len}}, cut it down and add ... at the end.
+
+<enscript highlight="scheme">
+(s-truncate 6 "This is too long") ;; => "Thi..."
+(s-truncate 16 "This is also too long") ;; => "This is also ..."
+(s-truncate 16 "But this is not!") ;; => "But this is not!"
+</enscript>
+
+==== s-left
+
+<procedure> (s-left len s)</procedure>
+
+Returns up to the {{len}} first chars of {{s}}.
+
+<enscript highlight="scheme">
+(s-left 3 "lib/file.js") ;; => "lib"
+(s-left 3 "li") ;; => "li"
+</enscript>
+
+==== s-right
+
+<procedure> (s-right len s)</procedure>
+
+Returns up to the {{len}} last chars of {{s}}.
+
+<enscript highlight="scheme">
+(s-right 3 "lib/file.js") ;; => ".js"
+(s-right 3 "li") ;; => "li"
+</enscript>
+
+==== s-chop-suffix
+
+<procedure> (s-chop-suffix suffix s)</procedure>
+
+Remove {{suffix}} if it is at end of {{s}}.
+
+<enscript highlight="scheme">
+(s-chop-suffix "-test.js" "penguin-test.js") ;; => "penguin"
+(s-chop-suffix "\n" "no newlines\n") ;; => "no newlines"
+(s-chop-suffix "\n" "some newlines\n\n") ;; => "some newlines\n"
+</enscript>
+
+==== s-chop-suffixes
+
+<procedure> (s-chop-suffixes suffixes s)</procedure>
+
+Remove {{suffixes}} one by one in order, if they are at the end of {{s}}.
+
+<enscript highlight="scheme">
+(s-chop-suffixes '("_test.js" "-test.js" "Test.js") "penguin-test.js") ;; => "penguin"
+(s-chop-suffixes '("\r" "\n") "penguin\r\n") ;; => "penguin\r"
+(s-chop-suffixes '("\n" "\r") "penguin\r\n") ;; => "penguin"
+</enscript>
+
+==== s-chop-prefix
+
+<procedure> (s-chop-prefix prefix s)</procedure>
+
+Remove {{prefix}} if it is at the start of {{s}}.
+
+<enscript highlight="scheme">
+(s-chop-prefix "/tmp" "/tmp/file.js") ;; => "/file.js"
+(s-chop-prefix "/tmp" "/tmp/tmp/file.js") ;; => "/tmp/file.js"
+</enscript>
+
+==== s-chop-prefixes
+
+<procedure> (s-chop-prefixes prefixes s)</procedure>
+
+Remove {{prefixes}} one by one in order, if they are at the start of {{s}}.
+
+<enscript highlight="scheme">
+(s-chop-prefixes '("/tmp" "/my") "/tmp/my/file.js") ;; => "/file.js"
+(s-chop-prefixes '("/my" "/tmp") "/tmp/my/file.js") ;; => "/my/file.js"
+</enscript>
+
+==== s-shared-start
+
+<procedure> (s-shared-start s1 s2)</procedure>
+
+Returns the longest prefix {{s1}} and {{s2}} have in common.
+
+<enscript highlight="scheme">
+(s-shared-start "bar" "baz") ;; => "ba"
+(s-shared-start "foobar" "foo") ;; => "foo"
+(s-shared-start "bar" "foo") ;; => ""
+</enscript>
+
+==== s-shared-end
+
+<procedure> (s-shared-end s1 s2)</procedure>
+
+Returns the longest suffix {{s1}} and {{s2}} have in common.
+
+<enscript highlight="scheme">
+(s-shared-end "bar" "var") ;; => "ar"
+(s-shared-end "foo" "foo") ;; => "foo"
+(s-shared-end "bar" "foo") ;; => ""
+</enscript>
+
+==== s-repeat
+
+<procedure> (s-repeat num s)</procedure>
+
+Make a string of {{s}} repeated {{num}} times.
+
+<enscript highlight="scheme">
+(s-repeat 10 " ") ;; => "          "
+(s-concat (s-repeat 8 "Na") " Batman!") ;; => "NaNaNaNaNaNaNaNa Batman!"
+</enscript>
+
+==== s-concat
+
+<procedure> (s-concat s ...)</procedure>
+
+Join all the string arguments into one string.
+
+<enscript highlight="scheme">
+(s-concat "abc" "def" "ghi") ;; => "abcdefghi"
+</enscript>
+
+==== s-prepend
+
+<procedure> (s-prepend prefix s)</procedure>
+
+Concatenate {{prefix}} and {{s}}.
+
+<enscript highlight="scheme">
+(s-prepend "abc" "def") ;; => "abcdef"
+</enscript>
+
+==== s-append
+
+<procedure> (s-append suffix s)</procedure>
+
+Concatenate {{s}} and {{suffix}}.
+
+<enscript highlight="scheme">
+(s-append "abc" "def") ;; => "defabc"
+</enscript>
+
+==== s-lines
+
+<procedure> (s-lines s)</procedure>
+
+Splits {{s}} into a list of strings on newline characters.
+
+<enscript highlight="scheme">
+(s-lines "abc\ndef\nghi") ;; => '("abc" "def" "ghi")
+(s-lines "abc\rdef\rghi") ;; => '("abc" "def" "ghi")
+(s-lines "abc\r\ndef\r\nghi") ;; => '("abc" "def" "ghi")
+</enscript>
+
+==== s-match
+
+<procedure> (s-match regexp s)</procedure>
+
+When the given expression matches the string, this function returns a
+list of the whole matching string and a string for each matched
+subexpression.  If it did not match the returned value is an empty
+list '().
+
+<enscript highlight="scheme">
+(s-match "^def" "abcdefg") ;; => '()
+(s-match "^abc" "abcdefg") ;; => '("abc")
+(s-match "^.*/([a-z]+).([a-z]+)" "/some/weird/file.html") ;; => '("/some/weird/file.html" "file" "html")
+</enscript>
+
+==== s-match-multiple
+
+<procedure> (s-match-multiple regexp s)</procedure>
+
+Returns a list of all matches to {{regexp}} in {{s}}.
+
+<enscript highlight="scheme">
+(s-match-multiple "[[:digit:]]{4}" "Grab (1234) four-digit (4321) numbers (4567)") ;; => ("1234" "4321" "4567")
+(s-match-multiple "<.+?>" "<html> <body> Some text </body> </html>") ;; => ("<html>" "<body>" "</body>" "</html>")
+(s-match-multiple "foo-[0-9]{2}" "foo-10 foo-11 foo-1 foo-2 foo-100 foo-21") ;; => ("foo-10" "foo-11" "foo-10" "foo-21")
+</enscript>
+
+==== s-split
+
+<procedure> (s-split separators s [keepempty])</procedure>
+
+Splits {{s}} into substrings bounded by matches for {{separators}}. If
+{{keepempty}} is #t, zero-length substrings are returned.
+
+<enscript highlight="scheme">
+(s-split " " "one  two  three") ;; => ("one" "two" "three")
+(s-split ":" "foo:bar::baz" #t) ;; => ("foo" "bar" "" "baz")
+(s-split ":," "foo:bar:baz,quux,zot") ;; => ("foo" "bar" "baz" "quux" "zot")
+</enscript>
+
+==== s-join
+
+<procedure> (s-join separator strings)</procedure>
+
+Join all the strings in {{strings}} with {{separator}} in between.
+
+<enscript highlight="scheme">
+(s-join "+" '("abc" "def" "ghi")) ;; => "abc+def+ghi"
+(s-join "\n" '("abc" "def" "ghi")) ;; => "abc\ndef\nghi"
+</enscript>
+
+==== s-equals?
+
+<procedure> (s-equals? s1 s2)</procedure>
+
+Is {{s1}} equal to {{s2}}?
+
+This is a simple wrapper around the built-in {{string=}}.
+
+<enscript highlight="scheme">
+(s-equals? "abc" "ABC") ;; => #f
+(s-equals? "abc" "abc") ;; => #t
+</enscript>
+
+==== s-matches?
+
+<procedure> (s-matches? regexp s)</procedure>
+
+Does {{regexp}} match {{s}}?
+
+<enscript highlight="scheme">
+(s-matches? "^[0-9]+$" "123") ;; => #t
+(s-matches? "^[0-9]+$" "a123") ;; => #f
+</enscript>
+
+==== s-blank?
+
+<procedure> (s-blank? s)</procedure>
+
+Is {{s}} the empty string?
+
+<enscript highlight="scheme">
+(s-blank? "") ;; => #t
+(s-blank? " ") ;; => #f
+</enscript>
+
+==== s-ends-with?
+
+<procedure> (s-ends-with? suffix s [ignore-case])</procedure>
+
+Does {{s}} end with {{suffix}}?
+
+If {{ignore-case}} is non-#f, the comparison is done without paying
+attention to case differences.
+
+Alias: {{s-suffix?}}
+
+<enscript highlight="scheme">
+(s-ends-with? ".md" "readme.md") ;; => #t
+(s-ends-with? ".MD" "readme.md") ;; => #f
+(s-ends-with? ".MD" "readme.md" #t) ;; => #t
+</enscript>
+
+==== s-starts-with?
+
+<procedure> (s-starts-with? prefix s [ignore-case])</procedure>
+
+Does {{s}} start with {{prefix}}?
+
+If {{ignore-case}} is non-#f, the comparison is done without paying
+attention to case differences.
+
+<enscript highlight="scheme">
+(s-starts-with? "lib/" "lib/file.js") ;; => #t
+(s-starts-with? "LIB/" "lib/file.js") ;; => #f
+(s-starts-with? "LIB/" "lib/file.js" #t) ;; => #t
+</enscript>
+
+==== s-contains?
+
+<procedure> (s-contains? needle s [ignore-case])</procedure>
+
+Does {{s}} contain {{needle}}?
+
+If {{ignore-case}} is non-#f, the comparison is done without paying
+attention to case differences.
+
+<enscript highlight="scheme">
+(s-contains? "file" "lib/file.js") ;; => #t
+(s-contains? "nope" "lib/file.js") ;; => #f
+(s-contains? "^a" "it's not ^a regexp") ;; => #t
+</enscript>
+
+==== s-lowercase?
+
+<procedure> (s-lowercase? s)</procedure>
+
+Are all the letters in {{s}} in lower case?
+
+<enscript highlight="scheme">
+(s-lowercase? "file") ;; => #t
+(s-lowercase? "File") ;; => #f
+(s-lowercase? "123?") ;; => #t
+</enscript>
+
+==== s-uppercase?
+
+<procedure> (s-uppercase? s)</procedure>
+
+Are all the letters in {{s}} in upper case?
+
+<enscript highlight="scheme">
+(s-uppercase? "HULK SMASH") ;; => #t
+(s-uppercase? "Bruce no smash") ;; => #f
+(s-uppercase? "123?") ;; => #t
+</enscript>
+
+==== s-mixedcase?
+
+<procedure> (s-mixedcase? s)</procedure>
+
+Are there both lower case and upper case letters in {{s}}?
+
+<enscript highlight="scheme">
+(s-mixedcase? "HULK SMASH") ;; => #f
+(s-mixedcase? "Bruce no smash") ;; => #t
+(s-mixedcase? "123?") ;; => #f
+</enscript>
+
+==== s-capitalized?
+
+<procedure> (s-capitalized? s)</procedure>
+In {{s}}, is the first letter upper case, and all other letters lower case?
+<enscript highlight="scheme">
+(s-capitalized? "Capitalized") ;; => #t
+(s-capitalized? "I am capitalized") ;; => #t
+(s-capitalized? "I Am Titleized") ;; => #f
+</enscript>
+
+==== s-titleized?
+
+<procedure> (s-titleized? s)</procedure>
+In {{s}}, is the first letter of each word upper case, and all other
+letters lower case?
+<enscript highlight="scheme">
+(s-titleized? "Titleized") ;; => #t
+(s-titleized? "I Am Titleized") ;; => #t
+(s-titleized? "I am only capitalized") ;; => #f
+</enscript>
+
+==== s-numeric?
+
+<procedure> (s-numeric? s)</procedure>
+
+Is {{s}} a number?
+
+<enscript highlight="scheme">
+(s-numeric? "123") ;; => #t
+(s-numeric? "onetwothree") ;; => #f
+</enscript>
+
+==== s-replace
+
+<procedure> (s-replace old new s)</procedure>
+
+Replaces {{old}} with {{new}} in {{s}}.
+
+<enscript highlight="scheme">
+(s-replace "file" "nope" "lib/file.js") ;; => "lib/nope.js"
+(s-replace "^a" "---" "it's not ^a regexp") ;; => "it's not --- regexp"
+</enscript>
+
+==== s-downcase
+
+<procedure> (s-downcase s)</procedure>
+
+Convert {{s}} to lower case.
+
+This is a simple wrapper around  {{string-downcase}}.
+
+<enscript highlight="scheme">
+(s-downcase "ABC") ;; => "abc"
+</enscript>
+
+==== s-upcase
+
+<procedure> (s-upcase s)</procedure>
+
+Convert {{s}} to upper case.
+
+This is a simple wrapper around {{string-upcase}}.
+
+<enscript highlight="scheme">
+(s-upcase "abc") ;; => "ABC"
+</enscript>
+
+==== s-capitalize
+
+<procedure> (s-capitalize s)</procedure>
+
+Convert the first word's first character to upper case and the rest to lower case in {{s}}.
+
+<enscript highlight="scheme">
+(s-capitalize "abc DEF") ;; => "Abc def"
+(s-capitalize "abc.DEF") ;; => "Abc.def"
+</enscript>
+
+==== s-titleize
+
+<procedure> (s-titleize s)</procedure>
+
+Convert each word's first character to upper case and the rest to lower case in {{s}}.
+
+This is a simple wrapper around  {{string-titlecase}}.
+
+<enscript highlight="scheme">
+(s-titleize "abc DEF") ;; => "Abc Def"
+(s-titleize "abc.DEF") ;; => "Abc.Def"
+</enscript>
+
+==== s-index-of
+
+<procedure> (s-index-of needle s [ignore-case])</procedure>
+
+Returns first index of {{needle}} in {{s}}, or #f.
+
+If {{ignore-case}} is non-#f, the comparison is done without paying
+attention to case differences.
+
+<enscript highlight="scheme">
+(s-index-of "abc" "abcdef") ;; => 0
+(s-index-of "CDE" "abcdef" #t) ;; => 2
+(s-index-of "n.t" "not a regexp") ;; => #f
+</enscript>
+
+==== s-reverse
+
+<procedure> (s-reverse s)</procedure>
+
+Return the reverse of {{s}}.
+
+<enscript highlight="scheme">
+(s-reverse "abc") ;; => "cba"
+(s-reverse "ab xyz") ;; => "zyx ba"
+(s-reverse "") ;; => ""
+</enscript>
+
+==== s-split-words
+
+<procedure> (s-split-words s)</procedure>
+
+Split {{s}} into list of words.
+
+<enscript highlight="scheme">
+(s-split-words "under_score") ;; => '("under" "score")
+(s-split-words "some-dashed-words") ;; => '("some" "dashed" "words")
+(s-split-words "evenCamelCase") ;; => '("even" "Camel" "Case")
+</enscript>
+
+==== s-lower-camel-case
+
+<procedure> (s-lower-camel-case s)</procedure>
+
+Convert {{s}} to lowerCamelCase.
+
+<enscript highlight="scheme">
+(s-lower-camel-case "some words") ;; => "someWords"
+(s-lower-camel-case "dashed-words") ;; => "dashedWords"
+(s-lower-camel-case "under_scored_words") ;; => "underScoredWords"
+</enscript>
+
+==== s-upper-camel-case
+
+<procedure> (s-upper-camel-case s)</procedure>
+
+Convert {{s}} to UpperCamelCase.
+
+<enscript highlight="scheme">
+(s-upper-camel-case "some words") ;; => "SomeWords"
+(s-upper-camel-case "dashed-words") ;; => "DashedWords"
+(s-upper-camel-case "under_scored_words") ;; => "UnderScoredWords"
+</enscript>
+
+==== s-snake-case
+
+<procedure> (s-snake-case s)</procedure>
+
+Convert {{s}} to snake_case.
+
+<enscript highlight="scheme">
+(s-snake-case "some words") ;; => "some_words"
+(s-snake-case "dashed-words") ;; => "dashed_words"
+(s-snake-case "camelCasedWords") ;; => "camel_cased_words"
+</enscript>
+
+==== s-dashed-words
+
+<procedure> (s-dashed-words s)</procedure>
+
+Convert {{s}} to dashed-words.
+
+<enscript highlight="scheme">
+(s-dashed-words "some words") ;; => "some-words"
+(s-dashed-words "under_scored_words") ;; => "under-scored-words"
+(s-dashed-words "camelCasedWords") ;; => "camel-cased-words"
+</enscript>
+
+==== s-capitalized-words
+
+<procedure> (s-capitalized-words s)</procedure>
+
+Convert {{s}} to Capitalized Words.
+
+<enscript highlight="scheme">
+(s-capitalized-words "some words") ;; => "Some words"
+(s-capitalized-words "under_scored_words") ;; => "Under scored words"
+(s-capitalized-words "camelCasedWords") ;; => "Camel cased words"
+</enscript>
+
+==== s-titleized-words
+
+<procedure> (s-titleized-words s)</procedure>
+
+Convert {{s}} to Titleized Words.
+
+<enscript highlight="scheme">
+(s-titleized-words "some words") ;; => "Some Words"
+(s-titleized-words "under_scored_words") ;; => "Under Scored Words"
+(s-titleized-words "camelCasedWords") ;; => "Camel Cased Words"
+</enscript>
+
+==== s-unique-words
+
+<procedure> (s-unique-words s)</procedure>
+
+Return list of unique words in {{s}}.
+
+<enscript highlight="scheme">
+(s-unique-words "Forget redundancy about about redundancy") ;; => ("Forget" "about" "redundancy")
+(s-unique-words "unique-dashed-words-dashed-words-too") ;; => ("unique" "dashed" "words" "too")
+(s-unique-words "camelCase_words and_and underscore_words_too") ;; => ("camel" "Case" "and" "underscore" "words" "too")
+</enscript>
+
+=== Changelog
+
+* 1.0 Initial release
+
+=== License
+
+Copyright (C) 2013 Nicholas M. Van Horn
+
+Author: Nicholas M. Van Horn <vanhorn.nm@gmail.com>
+Keywords: chicken, scheme, string
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
