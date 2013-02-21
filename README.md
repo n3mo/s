@@ -28,7 +28,11 @@ License
 
 Copyright (C) 2013 Nicholas M. Van Horn
 
+Original Elisp Library Copyright (C) 2012 Magnar Sveen
+
+
 Author: Nicholas M. Van Horn <vanhorn.nm@gmail.com>
+
 Keywords: chicken, scheme, string
 
 This program is free software; you can redistribute it and/or modify
