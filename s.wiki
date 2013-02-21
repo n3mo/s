@@ -747,6 +747,7 @@ Multiple examples for each procedure are given above.
 === License
 
 Copyright (C) 2013 Nicholas M. Van Horn
+
 Original Elisp Library Copyright (C) 2012 Magnar Sveen
 
 Author: Nicholas M. Van Horn
