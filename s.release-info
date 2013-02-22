@@ -1,4 +1,4 @@
 ;; -*- Scheme -*-
 (repo git "git://github.com/n3mo/s.git")
-(uri targz "https://github.com/n3mo/s/archive/{egg-release}.tar.gz")
+(uri targz "https://github.com/n3mo/s/archive/v1.0.tar.gz#/s-1.0.tar.gz")
 (release "1.0")
