@@ -258,7 +258,7 @@
   ;; 	(string-suffix? suffix s)))
 
 ;;; s-starts-with? (prefix s #!optional ignore-case)
-;;; Does s start with suffix? If ignore-case is #t, case comparison is
+;;; Does s start with prefix? If ignore-case is #t, case comparison is
 ;;; ignored. 
 (define (s-starts-with? prefix s #!optional (ignore-case #f))
   (if ignore-case
